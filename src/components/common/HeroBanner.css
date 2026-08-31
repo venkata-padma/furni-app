@@ -43,6 +43,51 @@
   height: auto;
 }
 
+/* Staggered "rise from the bottom" entrance — replays on every
+   navigation because the .hero is keyed by pathname. */
+@keyframes hero-rise {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.hero__title,
+.hero__description,
+.hero__actions {
+  animation: hero-rise 0.6s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+.hero__title {
+  animation-delay: 0.05s;
+}
+
+.hero__description {
+  animation-delay: 0.22s;
+}
+
+.hero__actions {
+  animation-delay: 0.39s;
+}
+
+.hero__image {
+  animation: hero-rise 0.7s cubic-bezier(0.22, 1, 0.36, 1) both;
+  animation-delay: 0.12s;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .hero__title,
+  .hero__description,
+  .hero__actions,
+  .hero__image {
+    animation: none;
+  }
+}
+
 @media (max-width: 900px) {
   .hero__inner {
     grid-template-columns: 1fr;

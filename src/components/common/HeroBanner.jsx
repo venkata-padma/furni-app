@@ -1,4 +1,4 @@
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 import Button from './Button';
 import './HeroBanner.css';
 
@@ -10,8 +10,12 @@ const sofaHero = '/hero-sofa.png';
  * title/description are page-specific; image defaults to the sofa hero shot.
  */
 function HeroBanner({ title, description, image = sofaHero, imageAlt = 'Furniture' }) {
+  const { pathname } = useLocation();
+
   return (
-    <section className="hero">
+    // key re-mounts the content on every route change so the entrance
+    // animation replays each time you navigate to a page.
+    <section className="hero" key={pathname}>
       <div className="container hero__inner">
         <div className="hero__content">
           <h1 className="hero__title">{title}</h1>
