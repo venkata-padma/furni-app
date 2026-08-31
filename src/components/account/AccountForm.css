@@ -1,0 +1,43 @@
+.account-form {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-md);
+  max-width: 640px;
+}
+
+.account-form__heading {
+  font-size: var(--fs-xl);
+  font-weight: 700;
+}
+
+.account-form__grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--space-md);
+}
+
+.account-form__password-field {
+  position: relative;
+}
+
+.account-form__change-password {
+  position: absolute;
+  right: 0;
+  top: 0;
+  background: none;
+  border: none;
+  color: var(--color-text-muted);
+  font-size: var(--fs-sm);
+}
+
+.account-form__actions {
+  display: flex;
+  gap: var(--space-sm);
+  margin-top: var(--space-xs);
+}
+
+@media (max-width: 560px) {
+  .account-form__grid {
+    grid-template-columns: 1fr;
+  }
+}

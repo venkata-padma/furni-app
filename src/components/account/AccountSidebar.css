@@ -1,0 +1,70 @@
+.account-sidebar {
+  background: var(--color-bg-soft);
+  padding: var(--space-md);
+  border-radius: var(--radius-md);
+}
+
+.account-sidebar__profile {
+  background: var(--color-bg);
+  border-radius: var(--radius-md);
+  padding: var(--space-md);
+  text-align: center;
+}
+
+.account-sidebar__avatar {
+  width: 72px;
+  height: 72px;
+  border-radius: 50%;
+  margin: 0 auto var(--space-xs);
+  object-fit: cover;
+}
+
+.account-sidebar__name {
+  font-weight: 700;
+}
+
+.account-sidebar__email {
+  color: var(--color-text-muted);
+  font-size: var(--fs-sm);
+}
+
+.account-sidebar__nav ul {
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+  margin-top: var(--space-md);
+}
+
+.account-sidebar__item {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  width: 100%;
+  padding: 0.7rem 0.9rem;
+  border-radius: var(--radius-sm);
+  border: 1px solid var(--color-border);
+  background: var(--color-bg);
+  font-size: var(--fs-sm);
+  color: var(--color-text);
+  text-align: left;
+  transition: background var(--transition-fast), color var(--transition-fast);
+}
+
+.account-sidebar__item:hover {
+  background: var(--color-bg-soft-2);
+}
+
+.account-sidebar__item--active {
+  background: var(--color-primary);
+  border-color: var(--color-primary);
+  color: var(--color-text-light);
+}
+
+.account-sidebar__item--danger {
+  color: var(--color-danger);
+  border-color: var(--color-danger);
+}
+
+.account-sidebar__item--danger:hover {
+  background: rgba(192, 57, 43, 0.08);
+}

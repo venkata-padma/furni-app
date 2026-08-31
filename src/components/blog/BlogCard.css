@@ -1,0 +1,115 @@
+.blog-card {
+  display: block;
+  color: inherit;
+  transition: transform 0.4s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.blog-card__media {
+  position: relative;
+  border-radius: var(--radius-md);
+  overflow: hidden;
+  aspect-ratio: 5 / 4;
+  transition: box-shadow 0.4s ease;
+}
+
+.blog-card__media img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.55s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+/* soft wash that fades in on hover */
+.blog-card__media::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg, transparent 45%, rgba(34, 40, 31, 0.4));
+  opacity: 0;
+  transition: opacity 0.4s ease;
+}
+
+.blog-card__title {
+  margin-top: var(--space-sm);
+  font-size: var(--fs-md);
+  font-weight: 600;
+  transition: color 0.25s ease;
+}
+
+.blog-card__meta {
+  margin-top: 0.35rem;
+  color: var(--color-text-muted);
+  font-size: var(--fs-sm);
+}
+
+.blog-card__author,
+.blog-card__date {
+  color: var(--color-text);
+  font-weight: 600;
+}
+
+.blog-card__more {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  margin-top: 0.5rem;
+  font-size: var(--fs-sm);
+  font-weight: 700;
+  color: var(--color-teal);
+  opacity: 0;
+  transform: translateY(4px);
+  transition: opacity 0.3s ease, transform 0.3s ease;
+}
+
+/* --- hover / keyboard-focus --- */
+.blog-card:hover,
+.blog-card:focus-visible {
+  transform: translateY(-6px);
+}
+
+.blog-card:hover .blog-card__media,
+.blog-card:focus-visible .blog-card__media {
+  box-shadow: var(--shadow-md);
+}
+
+.blog-card:hover .blog-card__media img,
+.blog-card:focus-visible .blog-card__media img {
+  transform: scale(1.06);
+}
+
+.blog-card:hover .blog-card__media::after,
+.blog-card:focus-visible .blog-card__media::after {
+  opacity: 1;
+}
+
+.blog-card:hover .blog-card__title,
+.blog-card:focus-visible .blog-card__title {
+  color: var(--color-teal);
+}
+
+.blog-card:hover .blog-card__more,
+.blog-card:focus-visible .blog-card__more {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.blog-card:focus-visible {
+  outline: 2px solid var(--color-teal);
+  outline-offset: 4px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .blog-card,
+  .blog-card__media,
+  .blog-card__media img,
+  .blog-card__more {
+    transition: opacity 0.2s ease;
+  }
+
+  .blog-card:hover,
+  .blog-card:focus-visible,
+  .blog-card:hover .blog-card__media img,
+  .blog-card:focus-visible .blog-card__media img {
+    transform: none;
+  }
+}

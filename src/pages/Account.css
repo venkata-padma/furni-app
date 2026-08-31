@@ -1,0 +1,14 @@
+.account-section {
+  padding-top: var(--space-xl);
+  padding-bottom: var(--space-xl);
+  display: grid;
+  grid-template-columns: 280px 1fr;
+  gap: var(--space-xl);
+  align-items: start;
+}
+
+@media (max-width: 768px) {
+  .account-section {
+    grid-template-columns: 1fr;
+  }
+}

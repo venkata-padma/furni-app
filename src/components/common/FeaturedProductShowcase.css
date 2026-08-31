@@ -1,0 +1,70 @@
+.showcase {
+  position: relative;
+  height: 350px;
+}
+
+.showcase__split {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+}
+
+/* Soft-grey band across the top; the rest is white so the armchair
+   straddles the two — a sliver on grey, the bulk on white — and flows
+   straight into the white newsletter + footer below. */
+.showcase__top {
+  height: 130px;
+  background: var(--color-bg-soft);
+}
+
+.showcase__bottom {
+  height: 220px;
+  background: var(--color-bg);
+}
+
+.showcase__image {
+  position: absolute;
+  right: var(--space-xl);
+  bottom: 0;
+  width: 340px;
+  filter: drop-shadow(0 24px 40px rgba(0, 0, 0, 0.18));
+  z-index: 1;
+}
+
+@media (max-width: 900px) {
+  .showcase {
+    height: 300px;
+  }
+
+  .showcase__top {
+    height: 110px;
+  }
+
+  .showcase__bottom {
+    height: 190px;
+  }
+
+  .showcase__image {
+    right: var(--space-lg);
+    width: 290px;
+  }
+}
+
+@media (max-width: 768px) {
+  .showcase {
+    height: 230px;
+  }
+
+  .showcase__top {
+    height: 85px;
+  }
+
+  .showcase__bottom {
+    height: 145px;
+  }
+
+  .showcase__image {
+    width: 200px;
+    right: var(--space-sm);
+  }
+}

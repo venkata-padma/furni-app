@@ -1,0 +1,99 @@
+.testimonials {
+  padding: var(--space-xl) 0;
+}
+
+/* `.container.` prefix raises specificity so this wins over the
+   generic `.container` max-width that loads later in the bundle. */
+.container.testimonials__inner {
+  max-width: 600px;
+  margin-inline: auto;
+  text-align: center;
+}
+
+.testimonials__heading {
+  font-size: var(--fs-xl);
+  font-weight: 600;
+}
+
+.testimonials__slide {
+  animation: testimonial-fade 0.5s ease;
+}
+
+@keyframes testimonial-fade {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.testimonials__quote {
+  margin-top: var(--space-md);
+  color: var(--color-text-muted);
+  /* Always reserve exactly four lines so the layout never jumps
+     between testimonials as the carousel auto-advances. */
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 4;
+  line-clamp: 4;
+  overflow: hidden;
+  min-height: calc(1.6em * 4);
+}
+
+.testimonials__avatar {
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  object-fit: cover;
+  margin: var(--space-md) auto 0;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.12);
+}
+
+.testimonials__name {
+  margin-top: var(--space-xs);
+  font-weight: 700;
+}
+
+.testimonials__title {
+  color: var(--color-text-muted);
+  font-size: var(--fs-sm);
+}
+
+.testimonials__dots {
+  display: flex;
+  justify-content: center;
+  gap: 0.5rem;
+  margin-top: var(--space-sm);
+}
+
+.testimonials__dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  border: none;
+  background: var(--color-border);
+  padding: 0;
+}
+
+.testimonials__dot {
+  cursor: pointer;
+  transition: background var(--transition-fast), transform var(--transition-fast);
+}
+
+.testimonials__dot:hover {
+  transform: scale(1.2);
+}
+
+.testimonials__dot--active {
+  background: var(--color-primary);
+  transform: scale(1.2);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .testimonials__slide {
+    animation: none;
+  }
+}

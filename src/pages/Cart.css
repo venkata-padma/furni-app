@@ -1,0 +1,23 @@
+.cart-section {
+  padding-top: var(--space-xl);
+  padding-bottom: var(--space-xl);
+  background: var(--color-bg-soft);
+}
+
+.cart-actions {
+  display: flex;
+  gap: var(--space-sm);
+  margin-top: var(--space-lg);
+  flex-wrap: wrap;
+}
+
+.cart-footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: var(--space-lg);
+  margin-top: var(--space-lg);
+  padding-top: var(--space-lg);
+  border-top: 1px solid var(--color-border);
+  flex-wrap: wrap;
+}

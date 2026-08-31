@@ -1,0 +1,55 @@
+:root {
+  /* Colors */
+  --color-primary: #3f6350;       /* deep green - header/hero */
+  --color-primary-dark: #2f4d3c;
+  --color-accent: #f0b429;        /* yellow - Shop Now button */
+  --color-accent-hover: #dba01f;
+  --color-teal: #2f9e8f;          /* teal armchair / links */
+  --color-teal-light: #eaf3f1;
+  --color-mint: #9de7c5;          /* light green - product card hover fill */
+
+  --color-text: #22281f;
+  --color-text-muted: #6b7268;
+  --color-text-light: #ffffff;
+  --color-text-light-muted: #d8e3dc;
+
+  --color-bg: #ffffff;
+  --color-bg-soft: #f2f3f0;
+  --color-bg-soft-2: #e9ece7;
+  --color-border: #d9ddd3;
+
+  --color-danger: #c0392b;
+
+  /* Typography */
+  --font-heading: 'Poppins', 'Segoe UI', sans-serif;
+  --font-body: 'Nunito Sans', 'Segoe UI', sans-serif;
+
+  --fs-xs: 0.8rem;
+  --fs-sm: 0.9rem;
+  --fs-base: 1rem;
+  --fs-md: 1.125rem;
+  --fs-lg: 1.5rem;
+  --fs-xl: 2rem;
+  --fs-2xl: 2.75rem;
+
+  /* Spacing */
+  --space-xs: 0.5rem;
+  --space-sm: 1rem;
+  --space-md: 1.5rem;
+  --space-lg: 2.5rem;
+  --space-xl: 4rem;
+  --space-2xl: 6rem;
+
+  /* Radius */
+  --radius-sm: 6px;
+  --radius-md: 12px;
+  --radius-pill: 999px;
+
+  /* Layout */
+  --container-max: 1280px;
+  --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.06);
+  --shadow-md: 0 8px 24px rgba(0, 0, 0, 0.08);
+
+  --transition-fast: 0.15s ease;
+  --transition-base: 0.25s ease;
+}

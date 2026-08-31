@@ -1,0 +1,22 @@
+.cart-table-wrap {
+  overflow-x: auto;
+}
+
+.cart-table {
+  width: 100%;
+  border-collapse: collapse;
+  min-width: 640px;
+}
+
+.cart-table thead th {
+  text-align: left;
+  padding: var(--space-sm) 0.75rem;
+  font-size: var(--fs-sm);
+  font-weight: 700;
+  border-bottom: 1px solid var(--color-border);
+}
+
+.cart-table__empty {
+  padding: var(--space-lg) 0;
+  color: var(--color-text-muted);
+}

@@ -1,0 +1,14 @@
+.not-found {
+  padding: var(--space-2xl) var(--space-lg);
+  text-align: center;
+}
+
+.not-found h1 {
+  font-size: var(--fs-xl);
+  font-weight: 700;
+}
+
+.not-found p {
+  margin: var(--space-sm) 0 var(--space-md);
+  color: var(--color-text-muted);
+}

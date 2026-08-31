@@ -1,0 +1,23 @@
+.feature-item__icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  background: var(--color-teal-light);
+  color: var(--color-text);
+  margin-bottom: var(--space-sm);
+}
+
+.feature-item__title {
+  font-size: var(--fs-md);
+  font-weight: 600;
+}
+
+.feature-item__description {
+  margin-top: 0.4rem;
+  color: var(--color-text-muted);
+  font-size: var(--fs-sm);
+  max-width: 32ch;
+}
