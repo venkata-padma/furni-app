@@ -1,7 +1,6 @@
 .cart-section {
   padding-top: var(--space-xl);
   padding-bottom: var(--space-xl);
-  background: var(--color-bg-soft);
 }
 
 .cart-actions {

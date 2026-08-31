@@ -1,5 +1,6 @@
 .newsletter {
   padding: var(--space-lg) 0 var(--space-xl);
+  background: var(--color-bg);
 }
 
 .newsletter__heading {

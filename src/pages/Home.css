@@ -27,7 +27,7 @@
   grid-template-columns: 1fr 1fr;
   gap: var(--space-xl);
   align-items: center;
-  background: var(--color-bg-soft);
+  background: var(--color-bg);
   border-radius: var(--radius-md);
   padding: var(--space-xl);
 }
@@ -133,7 +133,7 @@
   display: flex;
   gap: var(--space-sm);
   align-items: flex-start;
-  background: var(--color-bg-soft);
+  background: var(--color-bg);
   padding: var(--space-sm);
   border-radius: var(--radius-md);
 }

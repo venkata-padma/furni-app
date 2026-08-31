@@ -17,6 +17,13 @@ body {
   -webkit-font-smoothing: antialiased;
 }
 
+/* The page content sits on a soft tint; the hero (green), the lower
+   half of the showcase band, the newsletter and the footer paint their
+   own background over it. */
+main {
+  background: var(--color-bg-tint);
+}
+
 h1, h2, h3, h4, h5, h6 {
   font-family: var(--font-heading);
   margin: 0;

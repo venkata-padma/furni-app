@@ -14,6 +14,7 @@
   --color-text-light-muted: #d8e3dc;
 
   --color-bg: #ffffff;
+  --color-bg-tint: #eff2f1;       /* page tint behind content sections */
   --color-bg-soft: #f2f3f0;
   --color-bg-soft-2: #e9ece7;
   --color-border: #d9ddd3;

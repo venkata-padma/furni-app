@@ -16,7 +16,7 @@
    image bottom at the chosen width). */
 .showcase__top {
   height: 163px;
-  background: #eff2f1;
+  background: var(--color-bg-tint);
 }
 
 .showcase__bottom {
