@@ -1,6 +1,6 @@
 .showcase {
   position: relative;
-  height: 350px;
+  height: 290px;
 }
 
 .showcase__split {
@@ -9,16 +9,18 @@
   z-index: 0;
 }
 
-/* Soft-grey band across the top; the rest is white so the armchair
-   straddles the two — a sliver on grey, the bulk on white — and flows
-   straight into the white newsletter + footer below. */
+/* The band splits exactly across the armchair's vertical centre:
+   the top half of the chair sits on #EFF2F1, the bottom half on white,
+   flowing straight into the white newsletter + footer. Heights are tuned
+   to the armchair.png content box (visible chair centre ≈ 41% up from the
+   image bottom at the chosen width). */
 .showcase__top {
-  height: 130px;
-  background: var(--color-bg-soft);
+  height: 163px;
+  background: #eff2f1;
 }
 
 .showcase__bottom {
-  height: 220px;
+  height: 127px;
   background: var(--color-bg);
 }
 
@@ -33,15 +35,15 @@
 
 @media (max-width: 900px) {
   .showcase {
-    height: 300px;
+    height: 250px;
   }
 
   .showcase__top {
-    height: 110px;
+    height: 140px;
   }
 
   .showcase__bottom {
-    height: 190px;
+    height: 110px;
   }
 
   .showcase__image {
@@ -52,15 +54,15 @@
 
 @media (max-width: 768px) {
   .showcase {
-    height: 230px;
+    height: 175px;
   }
 
   .showcase__top {
-    height: 85px;
+    height: 100px;
   }
 
   .showcase__bottom {
-    height: 145px;
+    height: 75px;
   }
 
   .showcase__image {
