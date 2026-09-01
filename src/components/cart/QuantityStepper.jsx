@@ -7,9 +7,8 @@ function QuantityStepper({ quantity, onIncrease, onDecrease }) {
       <button
         type="button"
         onClick={onDecrease}
-        aria-label="Decrease quantity"
+        aria-label={quantity <= 1 ? 'Remove item' : 'Decrease quantity'}
         className="qty-stepper__btn"
-        disabled={quantity <= 1}
       >
         <Minus size={14} />
       </button>

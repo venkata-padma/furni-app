@@ -2,12 +2,27 @@
   display: flex;
   flex-direction: column;
   gap: var(--space-md);
-  max-width: 640px;
+  background: var(--color-bg);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow-sm);
+  padding: var(--space-lg);
+}
+
+.account-form__head {
+  border-bottom: 1px solid var(--color-border);
+  padding-bottom: var(--space-md);
 }
 
 .account-form__heading {
-  font-size: var(--fs-xl);
+  font-size: var(--fs-lg);
   font-weight: 700;
+}
+
+.account-form__sub {
+  margin-top: 0.25rem;
+  color: var(--color-text-muted);
+  font-size: var(--fs-sm);
 }
 
 .account-form__grid {
@@ -16,24 +31,18 @@
   gap: var(--space-md);
 }
 
-.account-form__password-field {
-  position: relative;
-}
-
-.account-form__change-password {
-  position: absolute;
-  right: 0;
-  top: 0;
-  background: none;
-  border: none;
-  color: var(--color-text-muted);
-  font-size: var(--fs-sm);
-}
-
 .account-form__actions {
   display: flex;
+  align-items: center;
   gap: var(--space-sm);
   margin-top: var(--space-xs);
+  flex-wrap: wrap;
+}
+
+.account-form__saved {
+  color: var(--color-teal);
+  font-weight: 700;
+  font-size: var(--fs-sm);
 }
 
 @media (max-width: 560px) {

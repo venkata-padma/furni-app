@@ -69,7 +69,11 @@ export function CartProvider({ children }) {
   const decrease = useCallback(
     (id) =>
       setItems((prev) =>
-        prev.map((i) => (i.id === id ? { ...i, quantity: Math.max(1, i.quantity - 1) } : i))
+        prev.flatMap((i) => {
+          if (i.id !== id) return [i];
+          // Dropping below 1 removes the line entirely.
+          return i.quantity <= 1 ? [] : [{ ...i, quantity: i.quantity - 1 }];
+        })
       ),
     []
   );

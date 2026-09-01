@@ -3,70 +3,74 @@ import FormInput from '../common/FormInput';
 import Button from '../common/Button';
 import './AccountForm.css';
 
-function AccountForm({ initialValues }) {
-  const [values, setValues] = useState(initialValues);
+function toValues(user) {
+  return {
+    firstName: user.firstName || '',
+    lastName: user.lastName || '',
+    email: user.email || '',
+    phone: user.phone || '',
+    address: user.address || '',
+  };
+}
 
-  function handleChange(field) {
-    return (e) => setValues((prev) => ({ ...prev, [field]: e.target.value }));
-  }
+function AccountForm({ user, onSave }) {
+  // The Account page remounts on auth changes, so initialising once is enough.
+  const [values, setValues] = useState(() => toValues(user));
+  const [saved, setSaved] = useState(false);
+
+  const set = (field) => (e) => {
+    setValues((prev) => ({ ...prev, [field]: e.target.value }));
+    setSaved(false);
+  };
 
   function handleSubmit(e) {
     e.preventDefault();
-    // Placeholder behaviour — wire up to a real account-update endpoint later.
+    onSave(values);
+    setSaved(true);
   }
 
-  function handleCancel() {
-    setValues(initialValues);
+  function handleReset() {
+    setValues(toValues(user));
+    setSaved(false);
   }
 
   return (
     <form className="account-form" onSubmit={handleSubmit}>
-      <h2 className="account-form__heading">Account Details</h2>
+      <header className="account-form__head">
+        <h2 className="account-form__heading">Profile Details</h2>
+        <p className="account-form__sub">This information appears on your account and orders.</p>
+      </header>
 
       <div className="account-form__grid">
-        <FormInput
-          id="first-name"
-          label="First Name"
-          value={values.firstName}
-          onChange={handleChange('firstName')}
-        />
-        <FormInput
-          id="last-name"
-          label="Last Name"
-          placeholder="Last Name"
-          value={values.lastName}
-          onChange={handleChange('lastName')}
-        />
+        <FormInput id="first-name" label="First Name" value={values.firstName} onChange={set('firstName')} />
+        <FormInput id="last-name" label="Last Name" value={values.lastName} onChange={set('lastName')} />
       </div>
 
+      <FormInput id="email" label="Email Address" type="email" value={values.email} onChange={set('email')} />
       <FormInput
-        id="email"
-        label="Email Address"
-        type="email"
-        value={values.email}
-        onChange={handleChange('email')}
+        id="phone"
+        label="Phone"
+        type="tel"
+        value={values.phone}
+        onChange={set('phone')}
+        placeholder="+92 123 4567 890"
       />
-
-      <div className="account-form__password-field">
-        <FormInput
-          id="password"
-          label="Password"
-          type="password"
-          value={values.password}
-          onChange={handleChange('password')}
-        />
-        <button type="button" className="account-form__change-password">
-          Change Password
-        </button>
-      </div>
+      <FormInput
+        id="address"
+        label="Default Delivery Address"
+        value={values.address}
+        onChange={set('address')}
+        placeholder="Street, city, postcode"
+      />
 
       <div className="account-form__actions">
         <Button type="submit" variant="primary-solid">
           Save Changes
         </Button>
-        <Button type="button" variant="ghost" onClick={handleCancel}>
-          Cancel
+        <Button type="button" variant="ghost" onClick={handleReset}>
+          Reset
         </Button>
+        {saved && <span className="account-form__saved">Saved ✓</span>}
       </div>
     </form>
   );

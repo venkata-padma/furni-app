@@ -1,14 +1,22 @@
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
+import { X } from 'lucide-react';
 import HeroBanner from '../components/common/HeroBanner';
 import FormInput from '../components/common/FormInput';
 import Button from '../components/common/Button';
+import QuantityStepper from '../components/cart/QuantityStepper';
 import { useCart } from '../context/CartContext';
+import { useAuth } from '../context/AuthContext';
 import './Checkout.css';
 
 function Checkout() {
-  const { items, subtotal, discount, total, coupon, clear } = useCart();
-  const [form, setForm] = useState({ name: '', email: '', address: '' });
+  const { items, increase, decrease, remove, subtotal, discount, total, coupon, clear } = useCart();
+  const { user } = useAuth();
+  const [form, setForm] = useState({
+    name: [user?.firstName, user?.lastName].filter(Boolean).join(' '),
+    email: user?.email || '',
+    address: user?.address || '',
+  });
   const [placed, setPlaced] = useState(false);
 
   function handleChange(field) {
@@ -80,11 +88,31 @@ function Checkout() {
               <h2 className="checkout-order__heading">Order Summary</h2>
               <ul className="checkout-order__items">
                 {items.map((item) => (
-                  <li key={item.id}>
-                    <span>
-                      {item.name} &times; {item.quantity}
+                  <li key={item.id} className="checkout-order__item">
+                    <img
+                      src={item.image}
+                      alt={item.name}
+                      className="checkout-order__thumb"
+                    />
+                    <div className="checkout-order__meta">
+                      <span className="checkout-order__name">{item.name}</span>
+                      <QuantityStepper
+                        quantity={item.quantity}
+                        onIncrease={() => increase(item.id)}
+                        onDecrease={() => decrease(item.id)}
+                      />
+                    </div>
+                    <span className="checkout-order__line">
+                      ${(item.price * item.quantity).toFixed(2)}
                     </span>
-                    <span>${(item.price * item.quantity).toFixed(2)}</span>
+                    <button
+                      type="button"
+                      className="checkout-order__remove"
+                      aria-label={`Remove ${item.name}`}
+                      onClick={() => remove(item.id)}
+                    >
+                      <X size={15} />
+                    </button>
                   </li>
                 ))}
               </ul>

@@ -1,6 +1,7 @@
 import { NavLink, Link } from 'react-router-dom';
-import { User, ShoppingCart } from 'lucide-react';
+import { User, ShoppingCart, LogIn } from 'lucide-react';
 import { useCart } from '../../context/CartContext';
+import { useAuth } from '../../context/AuthContext';
 import './Header.css';
 
 const NAV_LINKS = [
@@ -14,6 +15,7 @@ const NAV_LINKS = [
 
 function Header() {
   const { count } = useCart();
+  const { isAuthenticated, user } = useAuth();
 
   return (
     <header className="header">
@@ -41,9 +43,20 @@ function Header() {
         </nav>
 
         <div className="header__actions">
-          <Link to="/account" aria-label="Account" className="header__icon-link">
-            <User size={22} strokeWidth={1.75} />
-          </Link>
+          {isAuthenticated ? (
+            <Link to="/account" className="header__icon-link header__user" aria-label="Account">
+              <User size={22} strokeWidth={1.75} />
+              {user?.firstName && (
+                <span className="header__user-name">{user.firstName}</span>
+              )}
+            </Link>
+          ) : (
+            <Link to="/login" className="header__login">
+              <LogIn size={17} strokeWidth={2} />
+              Login
+            </Link>
+          )}
+
           <Link
             to="/cart"
             aria-label={`Cart, ${count} item${count === 1 ? '' : 's'}`}
