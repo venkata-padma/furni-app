@@ -1,4 +1,4 @@
-import { createBrowserRouter, RouterProvider } from 'react-router-dom';
+import { createBrowserRouter, Navigate, RouterProvider } from 'react-router-dom';
 import Layout from '../components/layout/Layout';
 import Home from '../pages/Home';
 import Shop from '../pages/Shop';
@@ -9,6 +9,10 @@ import Contact from '../pages/Contact';
 import Cart from '../pages/Cart';
 import Checkout from '../pages/Checkout';
 import Account from '../pages/Account';
+import AccountProfile from '../pages/account/Profile';
+import AccountOrders from '../pages/account/Orders';
+import AccountAddress from '../pages/account/Address';
+import AccountPayment from '../pages/account/Payment';
 import Login from '../pages/Login';
 import NotFound from '../pages/NotFound';
 
@@ -26,7 +30,17 @@ const router = createBrowserRouter([
       { path: 'cart', element: <Cart /> },
       { path: 'checkout', element: <Checkout /> },
       { path: 'login', element: <Login /> },
-      { path: 'account', element: <Account /> },
+      {
+        path: 'account',
+        element: <Account />,
+        children: [
+          { index: true, element: <Navigate to="/account/profile" replace /> },
+          { path: 'profile', element: <AccountProfile /> },
+          { path: 'orders', element: <AccountOrders /> },
+          { path: 'address', element: <AccountAddress /> },
+          { path: 'payment', element: <AccountPayment /> },
+        ],
+      },
       { path: '*', element: <NotFound /> },
     ],
   },

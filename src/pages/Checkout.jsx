@@ -12,16 +12,17 @@ import './Checkout.css';
 function Checkout() {
   const { items, increase, decrease, remove, subtotal, discount, total, coupon, clear } = useCart();
   const { user } = useAuth();
+
   const [form, setForm] = useState({
-    name: [user?.firstName, user?.lastName].filter(Boolean).join(' '),
     email: user?.email || '',
+    name: [user?.firstName, user?.lastName].filter(Boolean).join(' '),
     address: user?.address || '',
+    city: '',
+    postcode: '',
   });
   const [placed, setPlaced] = useState(false);
 
-  function handleChange(field) {
-    return (e) => setForm((prev) => ({ ...prev, [field]: e.target.value }));
-  }
+  const set = (field) => (e) => setForm((prev) => ({ ...prev, [field]: e.target.value }));
 
   function handleSubmit(e) {
     e.preventDefault();
@@ -38,7 +39,7 @@ function Checkout() {
 
       <section className="checkout-section container">
         {placed ? (
-          <div className="checkout-done">
+          <div className="checkout-done" data-reveal>
             <h2>Thank you for your order!</h2>
             <p>A confirmation has been sent to your email. Your furniture is on its way.</p>
             <Button as={Link} to="/shop" variant="dark">
@@ -46,7 +47,7 @@ function Checkout() {
             </Button>
           </div>
         ) : items.length === 0 ? (
-          <div className="checkout-done">
+          <div className="checkout-done" data-reveal>
             <h2>Your cart is empty</h2>
             <p>Add a few pieces before checking out.</p>
             <Button as={Link} to="/shop" variant="dark">
@@ -55,45 +56,80 @@ function Checkout() {
           </div>
         ) : (
           <div className="checkout-grid">
-            <form className="checkout-form" onSubmit={handleSubmit}>
-              <h2 className="checkout-form__heading">Delivery Details</h2>
-              <FormInput
-                id="checkout-name"
-                label="Full Name"
-                value={form.name}
-                onChange={handleChange('name')}
-                required
-              />
-              <FormInput
-                id="checkout-email"
-                label="Email Address"
-                type="email"
-                value={form.email}
-                onChange={handleChange('email')}
-                required
-              />
-              <FormInput
-                id="checkout-address"
-                label="Delivery Address"
-                value={form.address}
-                onChange={handleChange('address')}
-                required
-              />
-              <Button type="submit" variant="primary-solid">
-                Place Order
-              </Button>
+            <form id="checkout-form" className="checkout-main" onSubmit={handleSubmit}>
+              <div className="checkout-step" data-reveal>
+                <span className="checkout-step__num">1</span>
+                <div className="checkout-step__body">
+                  <h2 className="checkout-step__title">Contact</h2>
+                  <FormInput
+                    id="checkout-email"
+                    label="Email Address"
+                    type="email"
+                    value={form.email}
+                    onChange={set('email')}
+                    autoComplete="email"
+                    required
+                  />
+                </div>
+              </div>
+
+              <div className="checkout-step" data-reveal>
+                <span className="checkout-step__num">2</span>
+                <div className="checkout-step__body">
+                  <h2 className="checkout-step__title">Delivery Address</h2>
+                  <FormInput
+                    id="checkout-name"
+                    label="Full Name"
+                    value={form.name}
+                    onChange={set('name')}
+                    autoComplete="name"
+                    required
+                  />
+                  <FormInput
+                    id="checkout-address"
+                    label="Street Address"
+                    value={form.address}
+                    onChange={set('address')}
+                    autoComplete="street-address"
+                    required
+                  />
+                  <div className="checkout-step__row">
+                    <FormInput
+                      id="checkout-city"
+                      label="City"
+                      value={form.city}
+                      onChange={set('city')}
+                      required
+                    />
+                    <FormInput
+                      id="checkout-postcode"
+                      label="Postcode"
+                      value={form.postcode}
+                      onChange={set('postcode')}
+                      required
+                    />
+                  </div>
+                </div>
+              </div>
+
+              <div className="checkout-step" data-reveal>
+                <span className="checkout-step__num">3</span>
+                <div className="checkout-step__body">
+                  <h2 className="checkout-step__title">Payment</h2>
+                  <p className="checkout-step__note">
+                    Payment is simulated in this demo — no card details are collected.
+                  </p>
+                </div>
+              </div>
             </form>
 
-            <aside className="checkout-order">
+            <aside className="checkout-order" data-reveal>
               <h2 className="checkout-order__heading">Order Summary</h2>
+
               <ul className="checkout-order__items">
                 {items.map((item) => (
                   <li key={item.id} className="checkout-order__item">
-                    <img
-                      src={item.image}
-                      alt={item.name}
-                      className="checkout-order__thumb"
-                    />
+                    <img src={item.image} alt={item.name} className="checkout-order__thumb" />
                     <div className="checkout-order__meta">
                       <span className="checkout-order__name">{item.name}</span>
                       <QuantityStepper
@@ -116,6 +152,7 @@ function Checkout() {
                   </li>
                 ))}
               </ul>
+
               <dl className="checkout-order__totals">
                 <div>
                   <dt>Subtotal</dt>
@@ -132,6 +169,15 @@ function Checkout() {
                   <dd>${total.toFixed(2)}</dd>
                 </div>
               </dl>
+
+              <Button
+                type="submit"
+                form="checkout-form"
+                variant="primary-solid"
+                className="checkout-order__submit"
+              >
+                Place Order
+              </Button>
             </aside>
           </div>
         )}

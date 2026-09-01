@@ -9,12 +9,11 @@ function toValues(user) {
     lastName: user.lastName || '',
     email: user.email || '',
     phone: user.phone || '',
-    address: user.address || '',
   };
 }
 
 function AccountForm({ user, onSave }) {
-  // The Account page remounts on auth changes, so initialising once is enough.
+  // The Account area remounts on auth changes, so initialising once is enough.
   const [values, setValues] = useState(() => toValues(user));
   const [saved, setSaved] = useState(false);
 
@@ -35,7 +34,7 @@ function AccountForm({ user, onSave }) {
   }
 
   return (
-    <form className="account-form" onSubmit={handleSubmit}>
+    <form className="account-form" onSubmit={handleSubmit} data-reveal>
       <header className="account-form__head">
         <h2 className="account-form__heading">Profile Details</h2>
         <p className="account-form__sub">This information appears on your account and orders.</p>
@@ -54,13 +53,6 @@ function AccountForm({ user, onSave }) {
         value={values.phone}
         onChange={set('phone')}
         placeholder="+92 123 4567 890"
-      />
-      <FormInput
-        id="address"
-        label="Default Delivery Address"
-        value={values.address}
-        onChange={set('address')}
-        placeholder="Street, city, postcode"
       />
 
       <div className="account-form__actions">

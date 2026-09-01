@@ -1,16 +1,16 @@
-import { User, FileText, Heart, MapPin, CreditCard, LogOut } from 'lucide-react';
+import { NavLink } from 'react-router-dom';
+import { User, FileText, MapPin, CreditCard, LogOut } from 'lucide-react';
 import Avatar from '../common/Avatar';
 import './AccountSidebar.css';
 
 const NAV_ITEMS = [
-  { id: 'profile', label: 'My Profile', icon: User },
-  { id: 'orders', label: 'My Orders', icon: FileText },
-  { id: 'wishlist', label: 'Wishlist', icon: Heart },
-  { id: 'address', label: 'Address', icon: MapPin },
-  { id: 'payment', label: 'Payment Methods', icon: CreditCard },
+  { to: '/account/profile', label: 'My Profile', icon: User },
+  { to: '/account/orders', label: 'My Orders', icon: FileText },
+  { to: '/account/address', label: 'Address', icon: MapPin },
+  { to: '/account/payment', label: 'Payment Methods', icon: CreditCard },
 ];
 
-function AccountSidebar({ user, cartCount = 0, activeItem = 'profile', onSelect, onLogout }) {
+function AccountSidebar({ user, cartCount = 0, onLogout }) {
   return (
     <aside className="account-sidebar">
       <div className="account-sidebar__profile">
@@ -27,23 +27,22 @@ function AccountSidebar({ user, cartCount = 0, activeItem = 'profile', onSelect,
 
       <nav className="account-sidebar__nav" aria-label="Account">
         <ul>
-          {NAV_ITEMS.map(({ id, label, icon: Icon }) => (
-            <li key={id}>
-              <button
-                type="button"
-                className={
-                  id === activeItem
+          {NAV_ITEMS.map(({ to, label, icon: Icon }) => (
+            <li key={to}>
+              <NavLink
+                to={to}
+                className={({ isActive }) =>
+                  isActive
                     ? 'account-sidebar__item account-sidebar__item--active'
                     : 'account-sidebar__item'
                 }
-                onClick={() => onSelect?.(id)}
               >
                 <Icon size={17} strokeWidth={1.75} />
                 <span>{label}</span>
-                {id === 'orders' && cartCount > 0 && (
+                {to === '/account/orders' && cartCount > 0 && (
                   <span className="account-sidebar__badge">{cartCount}</span>
                 )}
-              </button>
+              </NavLink>
             </li>
           ))}
         </ul>

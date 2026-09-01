@@ -1,4 +1,5 @@
-.account-form {
+/* Shared card shell for the simple account sub-pages (Address, …). */
+.account-card {
   min-height: 100%;
   display: flex;
   flex-direction: column;
@@ -10,44 +11,47 @@
   padding: var(--space-lg);
 }
 
-.account-form__head {
+.account-card__head {
   border-bottom: 1px solid var(--color-border);
   padding-bottom: var(--space-md);
 }
 
-.account-form__heading {
+.account-card__title {
   font-size: var(--fs-lg);
   font-weight: 700;
 }
 
-.account-form__sub {
+.account-card__sub {
   margin-top: 0.25rem;
   color: var(--color-text-muted);
   font-size: var(--fs-sm);
 }
 
-.account-form__grid {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: var(--space-md);
+.account-card__current {
+  background: var(--color-bg-tint);
+  border-radius: var(--radius-sm);
+  padding: var(--space-sm) var(--space-md);
 }
 
-.account-form__actions {
+.account-card__label {
+  display: inline-block;
+  font-size: var(--fs-xs);
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  color: var(--color-text-muted);
+  margin-bottom: 0.25rem;
+}
+
+.account-card__actions {
   display: flex;
   align-items: center;
   gap: var(--space-sm);
-  margin-top: var(--space-xs);
   flex-wrap: wrap;
 }
 
-.account-form__saved {
+.account-card__saved {
   color: var(--color-teal);
   font-weight: 700;
   font-size: var(--fs-sm);
-}
-
-@media (max-width: 560px) {
-  .account-form__grid {
-    grid-template-columns: 1fr;
-  }
 }

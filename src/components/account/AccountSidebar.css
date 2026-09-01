@@ -1,11 +1,11 @@
 .account-sidebar {
+  display: flex;
+  flex-direction: column;
   background: var(--color-bg);
   border: 1px solid var(--color-border);
   border-radius: var(--radius-md);
   box-shadow: var(--shadow-sm);
   overflow: hidden;
-  position: sticky;
-  top: calc(var(--space-lg) + 56px);
 }
 
 /* --- profile header --- */
@@ -41,6 +41,7 @@
 
 /* --- nav --- */
 .account-sidebar__nav {
+  flex: 1;
   padding: var(--space-sm) var(--space-sm) var(--space-md);
   border-top: 1px solid var(--color-border);
 }
@@ -57,13 +58,10 @@
   gap: 0.7rem;
   width: 100%;
   padding: 0.7rem 0.85rem;
-  border: none;
   border-radius: var(--radius-sm);
-  background: none;
   font-size: var(--fs-sm);
   font-weight: 600;
   color: var(--color-text-muted);
-  text-align: left;
   transition: background var(--transition-fast), color var(--transition-fast),
     transform var(--transition-fast);
 }
@@ -74,11 +72,7 @@
   transform: translateX(2px);
 }
 
-.account-sidebar__item--active {
-  background: var(--color-primary);
-  color: var(--color-text-light);
-}
-
+.account-sidebar__item--active,
 .account-sidebar__item--active:hover {
   background: var(--color-primary);
   color: var(--color-text-light);
@@ -104,7 +98,7 @@
   align-items: center;
   gap: 0.7rem;
   width: 100%;
-  margin-top: var(--space-xs);
+  margin-top: var(--space-sm);
   padding: 0.7rem 0.85rem;
   border: 1px solid var(--color-border);
   border-radius: var(--radius-sm);
@@ -117,10 +111,4 @@
 
 .account-sidebar__logout:hover {
   background: rgba(192, 57, 43, 0.08);
-}
-
-@media (max-width: 768px) {
-  .account-sidebar {
-    position: static;
-  }
 }

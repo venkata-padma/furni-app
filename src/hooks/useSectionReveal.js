@@ -2,11 +2,15 @@ import { useLayoutEffect } from 'react';
 import { useLocation } from 'react-router-dom';
 
 /**
- * Minimal scroll-in reveal for a page's top-level sections.
+ * Scroll-in reveal: elements fade + rise into place one by one as they
+ * enter the viewport. Re-arms on every route change.
  *
- * Runs on every route change: marks each direct child of <main> (except the
- * hero, which has its own entrance) as hidden, then fades + rises it into
- * place once it scrolls into view. Honours prefers-reduced-motion.
+ * - If the page opts in with `data-reveal` attributes, those elements are
+ *   the targets (use this for finer control inside a page).
+ * - Otherwise every direct child of <main> (except the hero, which has its
+ *   own entrance) is a target.
+ *
+ * Honours prefers-reduced-motion and degrades to "always visible".
  */
 export function useSectionReveal() {
   const { pathname } = useLocation();
@@ -15,9 +19,10 @@ export function useSectionReveal() {
     const main = document.querySelector('main');
     if (!main) return undefined;
 
-    const targets = Array.from(main.children).filter(
-      (el) => !el.classList.contains('hero')
-    );
+    const opted = Array.from(main.querySelectorAll('[data-reveal]'));
+    const targets = opted.length
+      ? opted
+      : Array.from(main.children).filter((el) => !el.classList.contains('hero'));
 
     const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
     if (reduce || !('IntersectionObserver' in window)) {
@@ -25,9 +30,11 @@ export function useSectionReveal() {
       return undefined;
     }
 
-    targets.forEach((el) => {
+    targets.forEach((el, i) => {
       el.classList.add('reveal');
       el.classList.remove('reveal-in');
+      // Small cascade when several targets enter together (e.g. on load).
+      el.style.setProperty('--reveal-i', String(Math.min(i, 4)));
     });
 
     const io = new IntersectionObserver(
