@@ -56,6 +56,21 @@
   cursor: not-allowed;
 }
 
+.btn--danger {
+  background: var(--color-danger);
+  color: var(--color-text-light);
+}
+
+.btn--danger:hover {
+  background: #9c2b20;
+}
+
+/* icon + label spacing for buttons that carry a lucide glyph */
+.btn svg {
+  margin-right: 0.4rem;
+  margin-left: -0.15rem;
+}
+
 .btn:disabled {
   opacity: 0.6;
   cursor: not-allowed;

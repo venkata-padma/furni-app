@@ -64,6 +64,67 @@
   font-size: var(--fs-sm);
 }
 
+/* --- payment picker --- */
+.checkout-pay {
+  border: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.checkout-pay__legend {
+  font-weight: 600;
+  font-size: var(--fs-sm);
+  margin-bottom: 0.3rem;
+}
+
+.checkout-pay__option {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.6rem;
+  padding: 0.7rem 0.9rem;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-sm);
+  cursor: pointer;
+}
+
+.checkout-pay__option:has(input:checked) {
+  border-color: var(--color-primary);
+  background: var(--color-teal-light);
+}
+
+.checkout-pay__option input {
+  margin-top: 0.2rem;
+  accent-color: var(--color-primary);
+}
+
+.checkout-pay__label {
+  display: flex;
+  flex-direction: column;
+  font-weight: 600;
+  font-size: var(--fs-sm);
+}
+
+.checkout-pay__hint {
+  font-weight: 400;
+  font-size: var(--fs-xs);
+  color: var(--color-text-muted);
+}
+
+.checkout-pay__manage {
+  color: var(--color-teal);
+  font-weight: 700;
+}
+
+.checkout-done__actions {
+  display: flex;
+  gap: var(--space-sm);
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
 /* --- order summary --- */
 .checkout-order {
   position: sticky;

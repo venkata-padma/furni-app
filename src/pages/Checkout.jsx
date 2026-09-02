@@ -7,11 +7,16 @@ import Button from '../components/common/Button';
 import QuantityStepper from '../components/cart/QuantityStepper';
 import { useCart } from '../context/CartContext';
 import { useAuth } from '../context/AuthContext';
+import { useOrders } from '../context/OrdersContext';
 import './Checkout.css';
 
 function Checkout() {
   const { items, increase, decrease, remove, subtotal, discount, total, coupon, clear } = useCart();
   const { user } = useAuth();
+  const { placeOrder } = useOrders();
+
+  const savedCards = user?.paymentMethods || [];
+  const defaultCard = savedCards.find((c) => c.default) || savedCards[0];
 
   const [form, setForm] = useState({
     email: user?.email || '',
@@ -20,13 +25,30 @@ function Checkout() {
     city: '',
     postcode: '',
   });
-  const [placed, setPlaced] = useState(false);
+  const [payment, setPayment] = useState(defaultCard ? defaultCard.id : 'cod');
+  const [placedOrder, setPlacedOrder] = useState(null);
 
   const set = (field) => (e) => setForm((prev) => ({ ...prev, [field]: e.target.value }));
 
+  function paymentLabel() {
+    if (payment === 'cod') return 'Cash on Delivery';
+    const card = savedCards.find((c) => c.id === payment);
+    return card ? `${card.brand} •••• ${card.last4}` : 'Card';
+  }
+
   function handleSubmit(e) {
     e.preventDefault();
-    setPlaced(true);
+    const order = placeOrder({
+      items,
+      subtotal,
+      discount,
+      shipping: 0,
+      total,
+      couponCode: coupon?.code || null,
+      address: [form.address, form.city, form.postcode].filter(Boolean).join(', '),
+      payment: paymentLabel(),
+    });
+    setPlacedOrder(order);
     clear();
   }
 
@@ -38,13 +60,21 @@ function Checkout() {
       />
 
       <section className="checkout-section container">
-        {placed ? (
+        {placedOrder ? (
           <div className="checkout-done" data-reveal>
             <h2>Thank you for your order!</h2>
-            <p>A confirmation has been sent to your email. Your furniture is on its way.</p>
-            <Button as={Link} to="/shop" variant="dark">
-              Continue Shopping
-            </Button>
+            <p>
+              Your order <strong>{placedOrder.number}</strong> is confirmed and a receipt is on its
+              way to your email. Track its progress any time from your account.
+            </p>
+            <div className="checkout-done__actions">
+              <Button as={Link} to="/account/orders" variant="primary-solid">
+                View my orders
+              </Button>
+              <Button as={Link} to="/shop" variant="dark">
+                Continue Shopping
+              </Button>
+            </div>
           </div>
         ) : items.length === 0 ? (
           <div className="checkout-done" data-reveal>
@@ -116,8 +146,51 @@ function Checkout() {
                 <span className="checkout-step__num">3</span>
                 <div className="checkout-step__body">
                   <h2 className="checkout-step__title">Payment</h2>
+                  <fieldset className="checkout-pay">
+                    <legend className="checkout-pay__legend">Choose how to pay</legend>
+
+                    {savedCards.map((card) => (
+                      <label key={card.id} className="checkout-pay__option">
+                        <input
+                          type="radio"
+                          name="payment"
+                          value={card.id}
+                          checked={payment === card.id}
+                          onChange={() => setPayment(card.id)}
+                        />
+                        <span className="checkout-pay__label">
+                          {card.brand} •••• {card.last4}
+                          <span className="checkout-pay__hint">expires {card.expiry}</span>
+                        </span>
+                      </label>
+                    ))}
+
+                    <label className="checkout-pay__option">
+                      <input
+                        type="radio"
+                        name="payment"
+                        value="cod"
+                        checked={payment === 'cod'}
+                        onChange={() => setPayment('cod')}
+                      />
+                      <span className="checkout-pay__label">
+                        Cash on Delivery
+                        <span className="checkout-pay__hint">Pay in cash when it arrives</span>
+                      </span>
+                    </label>
+                  </fieldset>
+
                   <p className="checkout-step__note">
-                    Payment is simulated in this demo — no card details are collected.
+                    {savedCards.length === 0 && (
+                      <>
+                        Want to pay by card?{' '}
+                        <Link to="/account/payment" className="checkout-pay__manage">
+                          Add one in your account
+                        </Link>
+                        . {' '}
+                      </>
+                    )}
+                    Payment is simulated in this demo — no money changes hands.
                   </p>
                 </div>
               </div>

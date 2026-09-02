@@ -13,6 +13,9 @@ import AccountProfile from '../pages/account/Profile';
 import AccountOrders from '../pages/account/Orders';
 import AccountAddress from '../pages/account/Address';
 import AccountPayment from '../pages/account/Payment';
+import AccountWishlist from '../pages/account/Wishlist';
+import AccountNotifications from '../pages/account/Notifications';
+import AccountSecurity from '../pages/account/Security';
 import Login from '../pages/Login';
 import NotFound from '../pages/NotFound';
 
@@ -37,8 +40,11 @@ const router = createBrowserRouter([
           { index: true, element: <Navigate to="/account/profile" replace /> },
           { path: 'profile', element: <AccountProfile /> },
           { path: 'orders', element: <AccountOrders /> },
+          { path: 'wishlist', element: <AccountWishlist /> },
           { path: 'address', element: <AccountAddress /> },
           { path: 'payment', element: <AccountPayment /> },
+          { path: 'notifications', element: <AccountNotifications /> },
+          { path: 'security', element: <AccountSecurity /> },
         ],
       },
       { path: '*', element: <NotFound /> },

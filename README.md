@@ -40,6 +40,16 @@ npm run lint      # oxlint
   coupon codes (`FURNI10`, `WELCOME5`), derived subtotal / discount / total, persisted to
   `localStorage`. The header cart icon shows a live count badge; `/checkout` places the order
   and clears the cart.
+- **Account area** — `/account` (auth-gated) with a grouped sidebar:
+  - **Profile** — an overview dashboard (order / wishlist / saved-card stats, setup checklist) plus editable details.
+  - **My Orders** — real orders created at checkout (`src/context/OrdersContext.jsx`, persisted to
+    `localStorage`), each with a delivery timeline, expandable summary, cancel, "mark received" and
+    "buy again". Empty state uses `/public/no-orders.png`.
+  - **Wishlist** — heart any product in the shop (`src/context/WishlistContext.jsx`); move items to cart individually or in bulk.
+  - **Address**, **Payment Methods** (add / remove / set-default cards — only brand, last 4 and
+    expiry are stored — plus an "accepted payment methods" reference), **Notifications**
+    (per-channel email toggles), **Security** (change password, sign out everywhere, delete account).
+- **Checkout** — pick a saved card or Cash on Delivery; placing the order records it under My Orders.
 - **Testimonials** — auto-advancing carousel (5s loop, pauses on hover) with a fixed-height quote.
 - **Blog cards** — image zoom, lift, colour shift and a "Read More" reveal on hover.
 

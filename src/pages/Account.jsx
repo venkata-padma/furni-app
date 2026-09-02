@@ -2,13 +2,15 @@ import { Navigate, Outlet, useNavigate } from 'react-router-dom';
 import HeroBanner from '../components/common/HeroBanner';
 import AccountSidebar from '../components/account/AccountSidebar';
 import { useAuth } from '../context/AuthContext';
-import { useCart } from '../context/CartContext';
+import { useOrders } from '../context/OrdersContext';
+import { useWishlist } from '../context/WishlistContext';
 import './Account.css';
 
 /** Account area layout: persistent sidebar + routed panel (<Outlet />). */
 function Account() {
   const { user, isAuthenticated, logout } = useAuth();
-  const { count } = useCart();
+  const { count: orderCount } = useOrders();
+  const { count: wishlistCount } = useWishlist();
   const navigate = useNavigate();
 
   if (!isAuthenticated) return <Navigate to="/login" replace />;
@@ -26,7 +28,11 @@ function Account() {
       <section className="account-section container">
         <AccountSidebar
           user={{ ...user, name: fullName }}
-          cartCount={count}
+          badges={{
+            orders: orderCount,
+            wishlist: wishlistCount,
+            cards: user.paymentMethods?.length || 0,
+          }}
           onLogout={() => {
             logout();
             navigate('/');

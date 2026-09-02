@@ -46,6 +46,22 @@
   border-top: 1px solid var(--color-border);
 }
 
+.account-sidebar__group + .account-sidebar__group {
+  margin-top: var(--space-sm);
+  padding-top: var(--space-sm);
+  border-top: 1px solid var(--color-border);
+}
+
+.account-sidebar__group-label {
+  padding: 0 0.85rem;
+  margin-bottom: 0.4rem;
+  font-size: 0.68rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--color-text-muted);
+}
+
 .account-sidebar__nav ul {
   display: flex;
   flex-direction: column;
