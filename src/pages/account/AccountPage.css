@@ -293,8 +293,6 @@
   width: 44px;
   height: 44px;
   object-fit: contain;
-  background: var(--color-bg-tint);
-  border-radius: var(--radius-sm);
 }
 
 .order-card__item-meta {
