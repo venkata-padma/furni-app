@@ -21,7 +21,7 @@ function Services() {
 
       <section className="services-section container services-grid">
         {servicesFeatures.map((f) => (
-          <FeatureItem key={f.id} feature={f} />
+          <FeatureItem key={f.id} feature={f} variant="service" />
         ))}
       </section>
 

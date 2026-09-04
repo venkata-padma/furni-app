@@ -5,12 +5,12 @@
 }
 
 .cart-row__image img {
-  width: 72px;
-  height: 72px;
-  object-fit: cover;
+  width: 96px;
+  height: 96px;
+  object-fit: contain;
   border-radius: var(--radius-sm);
-  background: var(--color-teal-light);
-  padding: 0.5rem;
+  background: var(--color-bg-tint);
+  padding: 0.7rem;
 }
 
 .cart-row__name,

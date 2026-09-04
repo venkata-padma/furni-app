@@ -1,4 +1,5 @@
 import { Link } from 'react-router-dom';
+import { ArrowRight } from 'lucide-react';
 import HeroBanner from '../components/common/HeroBanner';
 import Button from '../components/common/Button';
 import ProductGrid from '../components/product/ProductGrid';
@@ -96,11 +97,14 @@ function Home() {
             <img src={p.image} alt={p.name} />
             <div>
               <h3>{p.name}</h3>
-              <p>Donec vitae odio quis nisi dapibus maesuada.</p>
-              <a href="#" className="featured-products__link">
+              <p>Thoughtfully designed comfort for modern living.</p>
+              <Link to={`/products/${p.id}`} className="featured-products__link">
                 Read More
-              </a>
+              </Link>
             </div>
+            <Link to={`/products/${p.id}`} className="featured-products__arrow" aria-label={`View ${p.name}`}>
+              <ArrowRight size={22} strokeWidth={2} />
+            </Link>
           </div>
         ))}
       </section>

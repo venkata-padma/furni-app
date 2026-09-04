@@ -1,9 +1,19 @@
 import CartItemRow from './CartItemRow';
+import AccountEmpty from '../account/AccountEmpty';
 import './CartTable.css';
 
 function CartTable({ items, onIncrease, onDecrease, onRemove }) {
   if (items.length === 0) {
-    return <p className="cart-table__empty">Your cart is empty.</p>;
+    return (
+      <AccountEmpty
+        image="/no-orders.png"
+        imageAlt="An empty shopping cart"
+        title="Your cart is empty"
+        body="There are no items in your cart yet. Explore our collection and find something made for your space."
+        actionLabel="Browse the Shop"
+        actionTo="/shop"
+      />
+    );
   }
 
   return (

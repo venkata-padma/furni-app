@@ -32,6 +32,16 @@
   background: rgba(255, 255, 255, 0.08);
 }
 
+.btn--outline-dark {
+  background: transparent;
+  border-color: var(--color-primary);
+  color: var(--color-primary-dark);
+}
+
+.btn--outline-dark:hover {
+  background: var(--color-teal-light);
+}
+
 .btn--dark {
   background: #23281f;
   color: var(--color-text-light);

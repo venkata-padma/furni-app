@@ -5,19 +5,38 @@ import './Footer.css';
 const FOOTER_COLUMNS = [
   {
     heading: 'Company',
-    links: ['About Us', 'Services', 'Blog', 'Contact Us'],
+    links: [
+      { label: 'Home', to: '/' },
+      { label: 'About Us', to: '/about' },
+      { label: 'Services', to: '/services' },
+      { label: 'Blog', to: '/blog' },
+      { label: 'Contact Us', to: '/contact' },
+    ],
   },
   {
-    heading: 'Support',
-    links: ['Support', 'Knowledge Base', 'Live Chat'],
+    heading: 'Shopping',
+    links: [
+      { label: 'Shop', to: '/shop' },
+      { label: 'Cart', to: '/cart' },
+      { label: 'Nordic Chair', to: '/products/nordic-chair' },
+      { label: 'Kruzo Chair', to: '/products/kruzo-chair' },
+      { label: 'Ergonomic Chair', to: '/products/ergonomic-chair' },
+    ],
   },
   {
-    heading: 'Careers',
-    links: ['Jobs', 'Our Team', 'Leadership', 'Privacy Policy'],
+    heading: 'Account',
+    links: [
+      { label: 'Profile', to: '/account/profile' },
+      { label: 'Orders', to: '/account/orders' },
+      { label: 'Saved Addresses', to: '/account/address' },
+    ],
   },
   {
-    heading: 'Products',
-    links: ['Nordic Chair', 'Kruzo aero Chair', 'Ergonomic Chair'],
+    heading: 'Legal',
+    links: [
+      { label: 'Terms & Conditions', to: '/terms' },
+      { label: 'Privacy Policy', to: '/privacy' },
+    ],
   },
 ];
 
@@ -56,9 +75,10 @@ function Footer() {
           <nav className="footer__columns" aria-label="Footer">
             {FOOTER_COLUMNS.map((col) => (
               <ul key={col.heading} className="footer__column">
+                <li className="footer__column-heading">{col.heading}</li>
                 {col.links.map((link) => (
-                  <li key={link}>
-                    <a href="#">{link}</a>
+                  <li key={link.to}>
+                    <Link to={link.to}>{link.label}</Link>
                   </li>
                 ))}
               </ul>
@@ -69,8 +89,8 @@ function Footer() {
         <div className="footer__bottom">
           <p>Copyright@2024. All Rights Reserved - designed with Love by Designer.com</p>
           <div className="footer__legal">
-            <a href="#">Terms &amp; Conditions</a>
-            <a href="#">Privacy Policy</a>
+            <Link to="/terms">Terms &amp; Conditions</Link>
+            <Link to="/privacy">Privacy Policy</Link>
           </div>
         </div>
       </div>

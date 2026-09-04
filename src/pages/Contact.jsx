@@ -38,50 +38,57 @@ function Contact() {
         description="Lorem Ipsum dolor sit amet consectetur. Pharetra aliquet ornarevelit blandit purus erat. Viverra ac tellus morbiet purus amet nec."
       />
 
-      <section className="contact-section container">
-        <div className="contact-info">
-          {CONTACT_INFO.map((item) => (
-            <ContactInfoItem key={item.label} icon={item.icon} label={item.label} />
-          ))}
-        </div>
-
-        <form className="contact-form" onSubmit={handleSubmit}>
-          <div className="contact-form__grid">
-            <FormInput
-              id="contact-first-name"
-              label="First Name"
-              value={form.firstName}
-              onChange={handleChange('firstName')}
-            />
-            <FormInput
-              id="contact-last-name"
-              label="Last Name"
-              value={form.lastName}
-              onChange={handleChange('lastName')}
-            />
+      <div className="contact-section-wrap">
+        <section className="contact-section container">
+          <div className="contact-section__intro">
+            <p className="contact-section__eyebrow">We would love to hear from you</p>
+            <h2>Let&apos;s make your space feel like home.</h2>
+            <p>Have a question about a product, an order, or your next room refresh? Send us a note and our team will get back to you soon.</p>
           </div>
 
-          <FormInput
-            id="contact-email"
-            label="Email Address"
-            type="email"
-            value={form.email}
-            onChange={handleChange('email')}
-          />
+          <div className="contact-info">
+            {CONTACT_INFO.map((item) => (
+              <ContactInfoItem key={item.label} icon={item.icon} label={item.label} />
+            ))}
+          </div>
 
-          <FormTextarea
-            id="contact-message"
-            label="Message"
-            value={form.message}
-            onChange={handleChange('message')}
-          />
+          <form className="contact-form" onSubmit={handleSubmit}>
+            <div className="contact-form__grid">
+              <FormInput
+                id="contact-first-name"
+                label="First Name"
+                value={form.firstName}
+                onChange={handleChange('firstName')}
+              />
+              <FormInput
+                id="contact-last-name"
+                label="Last Name"
+                value={form.lastName}
+                onChange={handleChange('lastName')}
+              />
+            </div>
 
-          <Button type="submit" variant="primary-solid">
-            Send Message
-          </Button>
-          {submitted && <p className="contact-form__success">Thanks — your message was sent.</p>}
-        </form>
-      </section>
+            <FormInput
+              id="contact-email"
+              label="Email Address"
+              type="email"
+              value={form.email}
+              onChange={handleChange('email')}
+            />
+            <FormTextarea
+              id="contact-message"
+              label="Message"
+              value={form.message}
+              onChange={handleChange('message')}
+            />
+
+            <Button type="submit" variant="primary-solid">
+              Send Message
+            </Button>
+            {submitted && <p className="contact-form__success">Thanks — your message was sent.</p>}
+          </form>
+        </section>
+      </div>
 
       <TestimonialCarousel testimonials={testimonials} />
       <FeaturedProductShowcase />

@@ -14,11 +14,13 @@
 }
 
 .account-empty__img {
-  width: 340px;
+  width: 280px;
   max-width: 78%;
   margin-bottom: var(--space-sm);
-  border-radius: var(--radius-md);
-  box-shadow: var(--shadow-md);
+  border-radius: 0;
+  box-shadow: none;
+  background: transparent;
+  padding: 0;
 }
 
 .account-empty__title {
