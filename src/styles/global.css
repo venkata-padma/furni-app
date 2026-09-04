@@ -65,9 +65,7 @@ textarea {
   width: 100%;
   max-width: var(--container-max);
   margin: 0 auto;
-  /* Only the horizontal gutter — never reset vertical padding that
-     section classes set, so `.x-section` rhythm survives the cascade. */
-  padding-inline: var(--space-lg);
+  padding-inline: clamp(1.5rem, 4vw, 4rem);
 }
 
 @media (max-width: 768px) {
