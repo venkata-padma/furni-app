@@ -18,6 +18,8 @@ function Services() {
       <HeroBanner
         title="Services"
         description="Lorem Ipsum dolor sit amet consectetur. Pharetra aliquet ornarevelit blandit purus erat. Viverra ac tellus morbiet purus amet nec."
+      />
+      <section className="services-section container services-grid">
         <HorizontalScrollRail>
           <div className="services-grid__items">
             {servicesFeatures.map((f) => (
@@ -25,9 +27,6 @@ function Services() {
             ))}
           </div>
         </HorizontalScrollRail>
-        {servicesFeatures.map((f) => (
-          <FeatureItem key={f.id} feature={f} variant="service" />
-        ))}
       </section>
 
       <section className="services-section container crafted">

@@ -14,6 +14,8 @@ function Blog() {
       <HeroBanner
         title="Blog"
         description="Lorem Ipsum dolor sit amet consectetur. Pharetra aliquet ornarevelit blandit purus erat. Viverra ac tellus morbiet purus amet nec."
+      />
+      <section className="blog-section container blog-grid">
         <HorizontalScrollRail>
           <div className="blog-grid__items">
             {blogPosts.map((post) => (
@@ -21,9 +23,6 @@ function Blog() {
             ))}
           </div>
         </HorizontalScrollRail>
-        {blogPosts.map((post) => (
-          <BlogCard key={post.id} post={post} />
-        ))}
       </section>
 
       <TestimonialCarousel testimonials={testimonials} />
