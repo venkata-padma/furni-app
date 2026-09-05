@@ -9,6 +9,7 @@ import './Login.css';
 function Login() {
   const { isAuthenticated, login } = useAuth();
   const navigate = useNavigate();
+  const [isCreatingAccount, setIsCreatingAccount] = useState(false);
   const [form, setForm] = useState({
     firstName: '',
     lastName: '',
@@ -16,28 +17,36 @@ function Login() {
     password: '',
   });
 
-  if (isAuthenticated) return <Navigate to="/account" replace />;
+  if (isAuthenticated) return <Navigate to="/account/profile" replace />;
 
   const set = (field) => (e) => setForm((prev) => ({ ...prev, [field]: e.target.value }));
 
   function handleSubmit(e) {
     e.preventDefault();
     login(form);
-    navigate('/account');
+    navigate('/account/profile');
   }
 
   return (
     <>
       <HeroBanner
-        title="Sign In"
-        description="Enter your details to access your Furni account, track orders and manage your profile."
+        title={isCreatingAccount ? 'Create Account' : 'Sign In'}
+        description={
+          isCreatingAccount
+            ? 'Create your Furni account to track orders and manage your profile.'
+            : 'Enter your details to access your Furni account, track orders and manage your profile.'
+        }
       />
 
       <section className="login-section container">
         <div className="login-card">
-          <h2 className="login-card__heading">Welcome to Furni</h2>
+          <h2 className="login-card__heading">
+            {isCreatingAccount ? 'Join Furni' : 'Welcome to Furni'}
+          </h2>
           <p className="login-card__sub">
-            We&rsquo;ll use these details for your profile and delivery.
+            {isCreatingAccount
+              ? 'Set up your account for a smoother shopping experience.'
+              : "We'll use these details for your profile and delivery."}
           </p>
 
           <form className="login-form" onSubmit={handleSubmit}>
@@ -75,14 +84,25 @@ function Login() {
               type="password"
               value={form.password}
               onChange={set('password')}
-              autoComplete="current-password"
+              autoComplete={isCreatingAccount ? 'new-password' : 'current-password'}
               required
             />
 
             <Button type="submit" variant="primary-solid" className="login-form__submit">
-              Sign In
+              {isCreatingAccount ? 'Create Account' : 'Sign In'}
             </Button>
           </form>
+
+          <div className="login-card__account-options">
+            <p>{isCreatingAccount ? 'Already have an account?' : "Don't have an account?"}</p>
+            <button
+              type="button"
+              className="login-card__account-action"
+              onClick={() => setIsCreatingAccount((current) => !current)}
+            >
+              {isCreatingAccount ? 'Sign in instead' : 'Create a new account'}
+            </button>
+          </div>
 
           <p className="login-card__foot">
             By continuing you agree to Furni&rsquo;s Terms &amp; Privacy Policy.

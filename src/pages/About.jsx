@@ -4,6 +4,7 @@ import TeamMemberCard from '../components/team/TeamMemberCard';
 import TestimonialCarousel from '../components/testimonial/TestimonialCarousel';
 import FeaturedProductShowcase from '../components/common/FeaturedProductShowcase';
 import NewsletterSubscribe from '../components/common/NewsletterSubscribe';
+import HorizontalScrollRail from '../components/common/HorizontalScrollRail';
 import { features } from '../data/features';
 import { teamWithBio } from '../data/team';
 import { testimonials } from '../data/testimonials';
@@ -38,9 +39,13 @@ function About() {
       </section>
 
       <section className="about-section container team-grid">
-        {teamWithBio.map((member) => (
-          <TeamMemberCard key={member.id} member={member} />
-        ))}
+        <HorizontalScrollRail>
+          <div className="team-grid__items">
+            {teamWithBio.map((member) => (
+              <TeamMemberCard key={member.id} member={member} />
+            ))}
+          </div>
+        </HorizontalScrollRail>
       </section>
 
       <TestimonialCarousel testimonials={testimonials} />

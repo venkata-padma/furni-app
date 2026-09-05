@@ -44,6 +44,34 @@
   margin-top: var(--space-xs);
 }
 
+.login-card__account-options {
+  margin-top: var(--space-lg);
+  padding-top: var(--space-md);
+  border-top: 1px solid var(--color-border);
+  text-align: center;
+  font-size: var(--fs-sm);
+}
+
+.login-card__account-options p {
+  color: var(--color-text-muted);
+}
+
+.login-card__account-action {
+  margin-top: var(--space-xs);
+  padding: 0;
+  border: 0;
+  background: transparent;
+  color: var(--color-primary);
+  font: inherit;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.login-card__account-action:hover {
+  color: var(--color-primary-dark);
+  text-decoration: underline;
+}
+
 .login-card__foot {
   margin-top: var(--space-md);
   color: var(--color-text-muted);

@@ -8,6 +8,7 @@ import BlogCard from '../components/blog/BlogCard';
 import TestimonialCarousel from '../components/testimonial/TestimonialCarousel';
 import FeaturedProductShowcase from '../components/common/FeaturedProductShowcase';
 import NewsletterSubscribe from '../components/common/NewsletterSubscribe';
+import HorizontalScrollRail from '../components/common/HorizontalScrollRail';
 import { products } from '../data/products';
 import { features } from '../data/features';
 import { blogPosts } from '../data/blogPosts';
@@ -92,21 +93,25 @@ function Home() {
       </section>
 
       <section className="home-section container featured-products">
-        {products.map((p) => (
-          <div key={p.id} className="featured-products__item">
-            <img src={p.image} alt={p.name} />
-            <div>
-              <h3>{p.name}</h3>
-              <p>Thoughtfully designed comfort for modern living.</p>
-              <Link to={`/products/${p.id}`} className="featured-products__link">
-                Read More
-              </Link>
-            </div>
-            <Link to={`/products/${p.id}`} className="featured-products__arrow" aria-label={`View ${p.name}`}>
-              <ArrowRight size={22} strokeWidth={2} />
-            </Link>
+        <HorizontalScrollRail>
+          <div className="featured-products__items">
+            {products.map((p) => (
+              <div key={p.id} className="featured-products__item">
+                <img src={p.image} alt={p.name} />
+                <div>
+                  <h3>{p.name}</h3>
+                  <p>Thoughtfully designed comfort for modern living.</p>
+                  <Link to={`/products/${p.id}`} className="featured-products__link">
+                    Read More
+                  </Link>
+                </div>
+                <Link to={`/products/${p.id}`} className="featured-products__arrow" aria-label={`View ${p.name}`}>
+                  <ArrowRight size={22} strokeWidth={2} />
+                </Link>
+              </div>
+            ))}
           </div>
-        ))}
+        </HorizontalScrollRail>
       </section>
 
       <TestimonialCarousel testimonials={testimonials} />
@@ -116,11 +121,13 @@ function Home() {
           <h2>Recent Blog</h2>
           <Link to="/blog">View All</Link>
         </div>
-        <div className="recent-blog__grid">
-          {blogPosts.slice(0, 3).map((post) => (
-            <BlogCard key={post.id} post={post} />
-          ))}
-        </div>
+        <HorizontalScrollRail>
+          <div className="recent-blog__grid">
+            {blogPosts.slice(0, 3).map((post) => (
+              <BlogCard key={post.id} post={post} />
+            ))}
+          </div>
+        </HorizontalScrollRail>
       </section>
 
       <FeaturedProductShowcase />

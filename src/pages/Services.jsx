@@ -6,6 +6,7 @@ import ProductGrid from '../components/product/ProductGrid';
 import TestimonialCarousel from '../components/testimonial/TestimonialCarousel';
 import FeaturedProductShowcase from '../components/common/FeaturedProductShowcase';
 import NewsletterSubscribe from '../components/common/NewsletterSubscribe';
+import HorizontalScrollRail from '../components/common/HorizontalScrollRail';
 import { servicesFeatures } from '../data/features';
 import { products } from '../data/products';
 import { testimonials } from '../data/testimonials';
@@ -17,9 +18,13 @@ function Services() {
       <HeroBanner
         title="Services"
         description="Lorem Ipsum dolor sit amet consectetur. Pharetra aliquet ornarevelit blandit purus erat. Viverra ac tellus morbiet purus amet nec."
-      />
-
-      <section className="services-section container services-grid">
+        <HorizontalScrollRail>
+          <div className="services-grid__items">
+            {servicesFeatures.map((f) => (
+              <FeatureItem key={f.id} feature={f} variant="service" />
+            ))}
+          </div>
+        </HorizontalScrollRail>
         {servicesFeatures.map((f) => (
           <FeatureItem key={f.id} feature={f} variant="service" />
         ))}

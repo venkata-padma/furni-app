@@ -1,0 +1,67 @@
+.horizontal-rail {
+  position: relative;
+}
+
+.horizontal-rail__viewport {
+  min-width: 0;
+}
+
+.horizontal-rail__arrow {
+  display: none;
+}
+
+@media (max-width: 600px) {
+  .horizontal-rail {
+    margin-inline: -0.25rem;
+  }
+
+  .horizontal-rail__viewport {
+    overflow-x: auto;
+    overscroll-behavior-inline: contain;
+    scroll-snap-type: x proximity;
+    scrollbar-width: none;
+    padding: 0.25rem;
+  }
+
+  .horizontal-rail__viewport::-webkit-scrollbar {
+    display: none;
+  }
+
+  .horizontal-rail__arrow {
+    position: absolute;
+    top: 50%;
+    z-index: 3;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 38px;
+    height: 38px;
+    padding: 0;
+    border: 1px solid var(--color-primary);
+    border-radius: 50%;
+    background: var(--color-primary);
+    color: var(--color-text-light);
+    box-shadow: var(--shadow-md);
+    transform: translateY(-50%);
+    transition: background var(--transition-fast), opacity var(--transition-fast),
+      transform var(--transition-fast);
+  }
+
+  .horizontal-rail__arrow:hover:not(:disabled) {
+    background: var(--color-primary-dark);
+    transform: translateY(-50%) scale(1.06);
+  }
+
+  .horizontal-rail__arrow:disabled {
+    opacity: 0;
+    pointer-events: none;
+  }
+
+  .horizontal-rail__arrow--left {
+    left: -0.5rem;
+  }
+
+  .horizontal-rail__arrow--right {
+    right: -0.5rem;
+  }
+}

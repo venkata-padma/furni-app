@@ -10,8 +10,17 @@
   }
 }
 
-@media (max-width: 480px) {
+@media (max-width: 600px) {
   .product-grid {
-    grid-template-columns: 1fr;
+    display: flex;
+    gap: var(--space-md);
+    width: max-content;
+    min-width: 100%;
+  }
+
+  .product-grid > .product-card {
+    width: min(72vw, 250px);
+    flex: 0 0 min(72vw, 250px);
+    scroll-snap-align: start;
   }
 }
