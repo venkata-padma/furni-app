@@ -16,8 +16,6 @@ function NewsletterSubscribe() {
   const [selectedPlan, setSelectedPlan] = useState(null);
   const [payment, setPayment] = useState({
     method: '',
-    cardType: '',
-    cardName: '',
     cardNumber: '',
     expiryMonth: '',
     expiryYear: '',
@@ -28,7 +26,7 @@ function NewsletterSubscribe() {
 
   function handleSubmit(e) {
     e.preventDefault();
-    setStep('plans');
+    setStep('success');
   }
 
   function choosePlan(plan) {
@@ -103,39 +101,37 @@ function NewsletterSubscribe() {
         {step === 'payment' && selectedPlan && (
           <form className="newsletter__step newsletter__payment" onSubmit={handlePayment}>
             <h3>Payment details</h3>
+            <div className="newsletter__payment-summary">
+              <span>{selectedPlan.label} subscription</span>
+              <strong>${selectedPlan.price.toFixed(2)}</strong>
+            </div>
             <label className="newsletter__select-field">
               <span>Payment method</span>
               <select value={payment.method} onChange={updatePayment('method')} required>
-                <option value="">Select payment method</option>
+                <option value="">Choose how to pay</option>
                 <option value="card">Credit or debit card</option>
                 <option value="paypal">PayPal</option>
                 <option value="apple-pay">Apple Pay</option>
               </select>
             </label>
-            <label className="newsletter__select-field">
-              <span>Card type</span>
-              <select value={payment.cardType} onChange={updatePayment('cardType')} required>
-                <option value="">Select card type</option>
-                <option value="visa">Visa</option>
-                <option value="mastercard">Mastercard</option>
-                <option value="amex">American Express</option>
-              </select>
-            </label>
-            <div className="newsletter__payment-field"><CreditCard size={18} /><input aria-label="Name on card" placeholder="Name on card" value={payment.cardName} onChange={updatePayment('cardName')} required /></div>
-            <div className="newsletter__payment-field"><CreditCard size={18} /><input aria-label="Card number" inputMode="numeric" placeholder="Card number" value={payment.cardNumber} onChange={updatePayment('cardNumber')} required /></div>
-            <div className="newsletter__payment-row">
-              <select aria-label="Expiry month" value={payment.expiryMonth} onChange={updatePayment('expiryMonth')} required>
-                <option value="">Month</option>
-                {Array.from({ length: 12 }, (_, index) => {
-                  const month = String(index + 1).padStart(2, '0');
-                  return <option key={month} value={month}>{month}</option>;
-                })}
-              </select>
-              <select aria-label="Expiry year" value={payment.expiryYear} onChange={updatePayment('expiryYear')} required>
-                <option value="">Year</option>
-                {[2026, 2027, 2028, 2029, 2030].map((year) => <option key={year} value={year}>{year}</option>)}
-              </select>
-            </div>
+            {payment.method === 'card' && (
+              <>
+                <div className="newsletter__payment-field"><CreditCard size={18} /><input aria-label="Card number" inputMode="numeric" placeholder="Card number" value={payment.cardNumber} onChange={updatePayment('cardNumber')} required /></div>
+                <div className="newsletter__payment-row">
+                  <select aria-label="Expiry month" value={payment.expiryMonth} onChange={updatePayment('expiryMonth')} required>
+                    <option value="">Expiry month</option>
+                    {Array.from({ length: 12 }, (_, index) => {
+                      const month = String(index + 1).padStart(2, '0');
+                      return <option key={month} value={month}>{month}</option>;
+                    })}
+                  </select>
+                  <select aria-label="Expiry year" value={payment.expiryYear} onChange={updatePayment('expiryYear')} required>
+                    <option value="">Expiry year</option>
+                    {[2026, 2027, 2028, 2029, 2030].map((year) => <option key={year} value={year}>{year}</option>)}
+                  </select>
+                </div>
+              </>
+            )}
             <div className="newsletter__step-actions">
               <button type="button" className="newsletter__back" onClick={() => setStep('review')}><ChevronLeft size={17} /> Review</button>
               <button type="submit" className="newsletter__submit">Pay ${selectedPlan.price.toFixed(2)} <ChevronRight size={17} /></button>
@@ -147,7 +143,7 @@ function NewsletterSubscribe() {
           <div className="newsletter__success-view">
             <CheckCircle2 size={72} strokeWidth={1.6} />
             <h3>You&apos;re subscribed!</h3>
-            <p>Your {selectedPlan?.label} subscription is active. A confirmation was sent to {email}.</p>
+            <p>Thanks, {name}. You are now subscribed to our newsletter. A confirmation was sent to {email}.</p>
           </div>
         )}
       </div>
