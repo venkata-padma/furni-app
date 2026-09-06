@@ -10,7 +10,17 @@
   }
 }
 
-@media (max-width: 600px) {
+@media (max-width: 768px) {
+  .explore-product-rail {
+    min-width: 0;
+    width: 100%;
+  }
+
+  .explore-product-rail .horizontal-rail__viewport {
+    min-width: 0;
+    scroll-padding-inline: 0.25rem;
+  }
+
   .product-grid {
     display: flex;
     gap: var(--space-md);

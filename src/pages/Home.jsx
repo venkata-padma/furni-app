@@ -47,7 +47,7 @@ function Home() {
               Explore
             </Button>
           </div>
-          <ProductGrid products={products} columns={3} />
+          <ProductGrid products={products} columns={3} className="explore-product-rail" />
         </div>
       </section>
 

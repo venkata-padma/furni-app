@@ -1,11 +1,13 @@
 import { Link } from 'react-router-dom';
-import { Package, Truck, Heart, CreditCard, ArrowRight } from 'lucide-react';
+import { Package, Truck, Heart, CreditCard, ArrowRight, ShoppingCart } from 'lucide-react';
 import { useOrders } from '../../context/OrdersContext';
 import { useWishlist } from '../../context/WishlistContext';
+import { useCart } from '../../context/CartContext';
 
 function AccountOverview({ user }) {
   const { orders } = useOrders();
-  const { count: wishlistCount } = useWishlist();
+  const { items: wishlistItems, count: wishlistCount, remove: removeWishlistItem } = useWishlist();
+  const { count: cartCount, addItem } = useCart();
 
   const inProgress = orders.filter(
     (o) => o.status !== 'Delivered' && o.status !== 'Cancelled'
@@ -74,6 +76,45 @@ function AccountOverview({ user }) {
           </ul>
         </div>
       )}
+
+      <div className="account-overview__saved">
+        <div className="account-overview__saved-head">
+          <div>
+            <p className="account-overview__saved-title">Saved for later</p>
+            <p className="account-overview__saved-sub">
+              {cartCount ? `${cartCount} piece${cartCount === 1 ? '' : 's'} in your cart.` : 'Keep your favourite chairs close.'}
+            </p>
+          </div>
+          <Link to="/account/wishlist" className="account-overview__saved-link">
+            View wishlist <ArrowRight size={15} strokeWidth={2} />
+          </Link>
+        </div>
+        {wishlistItems.length > 0 ? (
+          <ul className="account-overview__saved-list">
+            {wishlistItems.slice(0, 3).map((item) => (
+              <li key={item.id} className="account-overview__saved-item">
+                <img src={item.image} alt="" />
+                <span>{item.name}</span>
+                <button
+                  type="button"
+                  className="account-overview__saved-cart"
+                  aria-label={`Add ${item.name} to cart`}
+                  onClick={() => {
+                    addItem(item);
+                    removeWishlistItem(item.id);
+                  }}
+                >
+                  <ShoppingCart size={15} strokeWidth={2} />
+                </button>
+              </li>
+            ))}
+          </ul>
+        ) : (
+          <Link to="/shop" className="account-overview__saved-empty">
+            Browse chairs <ArrowRight size={15} strokeWidth={2} />
+          </Link>
+        )}
+      </div>
     </section>
   );
 }

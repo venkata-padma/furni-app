@@ -12,8 +12,8 @@ function Wishlist() {
   if (!items.length) {
     return (
       <AccountEmpty
-        image="/chair2-home.png"
-        imageAlt="Kruzo lounge chair"
+        image="/no-orders.png"
+        imageAlt="Empty shopping cart illustration"
         title="Your wishlist is empty"
         body="Tap the heart on any piece in the shop to keep it here while you decide."
         actionLabel="Explore the Shop"

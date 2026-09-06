@@ -23,6 +23,10 @@
   padding: 0;
 }
 
+.account-empty__img--mobile {
+  display: none;
+}
+
 .account-empty__title {
   font-size: var(--fs-lg);
   font-weight: 700;
@@ -32,4 +36,15 @@
   color: var(--color-text-muted);
   max-width: 40ch;
   margin-bottom: var(--space-sm);
+}
+
+@media (max-width: 768px) {
+  .account-empty__img:not(.account-empty__img--mobile) {
+    display: none;
+  }
+
+  .account-empty__img--mobile {
+    display: block;
+    width: min(240px, 72vw);
+  }
 }

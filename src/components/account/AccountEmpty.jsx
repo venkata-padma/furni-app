@@ -2,10 +2,17 @@ import { Link } from 'react-router-dom';
 import Button from '../common/Button';
 import './AccountEmpty.css';
 
-function AccountEmpty({ image, imageAlt = '', title, body, actionLabel, actionTo }) {
+function AccountEmpty({ image, mobileImage, imageAlt = '', mobileImageAlt, title, body, actionLabel, actionTo }) {
   return (
     <div className="account-empty" data-reveal>
       {image && <img src={image} alt={imageAlt} className="account-empty__img" />}
+      {mobileImage && (
+        <img
+          src={mobileImage}
+          alt={mobileImageAlt || imageAlt}
+          className="account-empty__img account-empty__img--mobile"
+        />
+      )}
       <h2 className="account-empty__title">{title}</h2>
       <p className="account-empty__body">{body}</p>
       {actionLabel && actionTo && (

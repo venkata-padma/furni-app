@@ -10,12 +10,14 @@
   display: none;
 }
 
-@media (max-width: 600px) {
+@media (max-width: 768px) {
   .horizontal-rail {
     margin-inline: -0.25rem;
+    padding-inline: 0.25rem;
   }
 
   .horizontal-rail__viewport {
+    width: 100%;
     overflow-x: auto;
     overscroll-behavior-inline: contain;
     scroll-snap-type: x proximity;
@@ -58,10 +60,10 @@
   }
 
   .horizontal-rail__arrow--left {
-    left: -0.5rem;
+    left: -0.25rem;
   }
 
   .horizontal-rail__arrow--right {
-    right: -0.5rem;
+    right: -0.25rem;
   }
 }

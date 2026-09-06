@@ -2,6 +2,7 @@ import { NavLink } from 'react-router-dom';
 import {
   User,
   Package,
+  Heart,
   MapPin,
   CreditCard,
   Bell,
@@ -17,6 +18,7 @@ const NAV_GROUPS = [
     items: [
       { to: '/account/profile', label: 'My Profile', icon: User },
       { to: '/account/orders', label: 'My Orders', icon: Package, badge: 'orders' },
+      { to: '/account/wishlist', label: 'Wishlist', icon: Heart, badge: 'wishlist' },
     ],
   },
   {

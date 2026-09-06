@@ -19,9 +19,18 @@ function HorizontalScrollRail({ children, className = '' }) {
     updateScrollState();
     rail.addEventListener('scroll', updateScrollState, { passive: true });
     window.addEventListener('resize', updateScrollState);
+    const observer = new ResizeObserver(updateScrollState);
+    observer.observe(rail);
+    if (rail.firstElementChild) observer.observe(rail.firstElementChild);
+    const images = [...rail.querySelectorAll('img')];
+    images.forEach((image) => image.addEventListener('load', updateScrollState));
+    const frame = requestAnimationFrame(updateScrollState);
     return () => {
       rail.removeEventListener('scroll', updateScrollState);
       window.removeEventListener('resize', updateScrollState);
+      observer.disconnect();
+      images.forEach((image) => image.removeEventListener('load', updateScrollState));
+      cancelAnimationFrame(frame);
     };
   }, []);
 
