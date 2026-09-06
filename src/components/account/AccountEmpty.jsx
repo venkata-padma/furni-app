@@ -6,9 +6,9 @@ function AccountEmpty({ image, mobileImage, imageAlt = '', mobileImageAlt, title
   return (
     <div className="account-empty" data-reveal>
       {image && <img src={image} alt={imageAlt} className="account-empty__img" />}
-      {mobileImage && (
+      {(mobileImage || image) && (
         <img
-          src={mobileImage}
+          src={mobileImage || image}
           alt={mobileImageAlt || imageAlt}
           className="account-empty__img account-empty__img--mobile"
         />
