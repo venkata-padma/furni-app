@@ -6,6 +6,7 @@ import FormInput from '../components/common/FormInput';
 import Button from '../components/common/Button';
 import QuantityStepper from '../components/cart/QuantityStepper';
 import { useCart } from '../context/CartContext';
+import { formatCurrency } from '../utils/currency';
 import { useAuth } from '../context/AuthContext';
 import { useOrders } from '../context/OrdersContext';
 import './Checkout.css';
@@ -253,7 +254,7 @@ function Checkout() {
                       />
                     </div>
                     <span className="checkout-order__line">
-                      ${(item.price * item.quantity).toFixed(2)}
+                      {formatCurrency(item.price * item.quantity)}
                     </span>
                     <button
                       type="button"
@@ -270,17 +271,17 @@ function Checkout() {
               <dl className="checkout-order__totals">
                 <div>
                   <dt>Subtotal</dt>
-                  <dd>${subtotal.toFixed(2)}</dd>
+                  <dd>{formatCurrency(subtotal)}</dd>
                 </div>
                 {discount > 0 && (
                   <div>
                     <dt>Discount{coupon ? ` (${coupon.code})` : ''}</dt>
-                    <dd>-${discount.toFixed(2)}</dd>
+                    <dd>-{formatCurrency(discount)}</dd>
                   </div>
                 )}
                 <div className="checkout-order__total">
                   <dt>Total</dt>
-                  <dd>${total.toFixed(2)}</dd>
+                  <dd>{formatCurrency(total)}</dd>
                 </div>
               </dl>
 

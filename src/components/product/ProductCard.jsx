@@ -1,6 +1,7 @@
 import { Minus, Plus, Heart } from 'lucide-react';
 import { useCart } from '../../context/CartContext';
 import { useWishlist } from '../../context/WishlistContext';
+import { formatCurrency } from '../../utils/currency';
 import './ProductCard.css';
 
 function ProductCard({ product }) {
@@ -25,7 +26,7 @@ function ProductCard({ product }) {
       <img className="product-card__img" src={image} alt={name} />
       <div className="product-card__info">
         <h3 className="product-card__name">{name}</h3>
-        <p className="product-card__price">${price.toFixed(2)}</p>
+        <p className="product-card__price">{formatCurrency(price)}</p>
       </div>
       {cartItem ? (
         <div className="product-card__quantity" aria-label={`${cartItem.quantity} ${name} in cart`}>

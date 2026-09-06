@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { Link, useParams } from 'react-router-dom';
 import { ArrowLeft, Check, Minus, Plus, ShoppingBag, Trash2 } from 'lucide-react';
 import { products } from '../data/products';
+import { formatCurrency } from '../utils/currency';
 import Button from '../components/common/Button';
 import { useCart } from '../context/CartContext';
 import './ProductDetail.css';
@@ -38,7 +39,7 @@ function ProductDetail() {
         <div className="product-detail__info">
           <p className="product-detail__eyebrow">Featured collection</p>
           <h1>{product.name}</h1>
-          <p className="product-detail__price">${product.price.toFixed(2)}</p>
+          <p className="product-detail__price">{formatCurrency(product.price)}</p>
           <p className="product-detail__description">A beautifully balanced piece made to bring comfort, character, and a considered finish to your everyday interior.</p>
           <ul>
             <li><Check size={18} /> Carefully selected materials</li>

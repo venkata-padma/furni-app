@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { CheckCircle2, ChevronLeft, ChevronRight, CreditCard, Mail, Send, UserRound } from 'lucide-react';
+import { formatCurrency } from '../../utils/currency';
 import './NewsletterSubscribe.css';
 
 const PLANS = [
@@ -75,7 +76,7 @@ function NewsletterSubscribe() {
               {PLANS.map((plan) => (
                 <button type="button" className="newsletter__plan" key={plan.id} onClick={() => choosePlan(plan)}>
                   <strong>{plan.label}</strong>
-                  <span>${plan.price.toFixed(2)}</span>
+                  <span>{formatCurrency(plan.price)}</span>
                 </button>
               ))}
             </div>
@@ -89,7 +90,7 @@ function NewsletterSubscribe() {
               <div><dt>Name</dt><dd>{name}</dd></div>
               <div><dt>Email</dt><dd>{email}</dd></div>
               <div><dt>Plan</dt><dd>{selectedPlan.label}</dd></div>
-              <div><dt>Total</dt><dd>${selectedPlan.price.toFixed(2)}</dd></div>
+              <div><dt>Total</dt><dd>{formatCurrency(selectedPlan.price)}</dd></div>
             </dl>
             <div className="newsletter__step-actions">
               <button type="button" className="newsletter__back" onClick={() => setStep('plans')}><ChevronLeft size={17} /> Plans</button>
@@ -103,7 +104,7 @@ function NewsletterSubscribe() {
             <h3>Payment details</h3>
             <div className="newsletter__payment-summary">
               <span>{selectedPlan.label} subscription</span>
-              <strong>${selectedPlan.price.toFixed(2)}</strong>
+              <strong>{formatCurrency(selectedPlan.price)}</strong>
             </div>
             <label className="newsletter__select-field">
               <span>Payment method</span>
@@ -134,7 +135,7 @@ function NewsletterSubscribe() {
             )}
             <div className="newsletter__step-actions">
               <button type="button" className="newsletter__back" onClick={() => setStep('review')}><ChevronLeft size={17} /> Review</button>
-              <button type="submit" className="newsletter__submit">Pay ${selectedPlan.price.toFixed(2)} <ChevronRight size={17} /></button>
+              <button type="submit" className="newsletter__submit">Pay {formatCurrency(selectedPlan.price)} <ChevronRight size={17} /></button>
             </div>
           </form>
         )}

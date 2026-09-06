@@ -5,9 +5,9 @@ const ergonomicChair = '/chair3-home.png';
 
 // Placeholder catalog data — replace with real API data when backend is available.
 export const products = [
-  { id: 'nordic-chair', name: 'Nordic Chair', price: 50.0, image: nordicChair },
-  { id: 'kruzo-chair', name: 'Kruzo Chair', price: 78.0, image: kruzoChair },
-  { id: 'ergonomic-chair', name: 'Ergonomic Chair', price: 44.0, image: ergonomicChair },
+  { id: 'nordic-chair', name: 'Nordic Chair', price: 20.0, image: nordicChair },
+  { id: 'kruzo-chair', name: 'Kruzo Chair', price: 31.2, image: kruzoChair },
+  { id: 'ergonomic-chair', name: 'Ergonomic Chair', price: 17.6, image: ergonomicChair },
 ];
 
 // Shop grid repeats the catalog to fill an 8-item layout, matching the design.

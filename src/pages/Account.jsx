@@ -1,5 +1,4 @@
 import { Navigate, Outlet, useNavigate } from 'react-router-dom';
-import HeroBanner from '../components/common/HeroBanner';
 import AccountSidebar from '../components/account/AccountSidebar';
 import { useAuth } from '../context/AuthContext';
 import { useOrders } from '../context/OrdersContext';
@@ -20,12 +19,6 @@ function Account() {
 
   return (
     <>
-      <HeroBanner
-        title={`Hi, ${user.firstName || 'there'}`}
-        description="Manage your profile details, track your orders and keep your preferences up to date."
-        exploreTo="/services"
-      />
-
       <section className="account-section container">
         <AccountSidebar
           user={{ ...user, name: fullName }}

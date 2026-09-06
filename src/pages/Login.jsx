@@ -1,6 +1,5 @@
 import { useState } from 'react';
 import { Navigate, useNavigate } from 'react-router-dom';
-import HeroBanner from '../components/common/HeroBanner';
 import FormInput from '../components/common/FormInput';
 import Button from '../components/common/Button';
 import { useAuth } from '../context/AuthContext';
@@ -12,6 +11,7 @@ function Login() {
   const [isCreatingAccount, setIsCreatingAccount] = useState(false);
   const [form, setForm] = useState({
     firstName: '',
+    lastName: '',
     email: '',
     password: '',
     confirmPassword: '',
@@ -35,16 +35,6 @@ function Login() {
 
   return (
     <>
-      <HeroBanner
-        title={isCreatingAccount ? 'Create Account' : 'Login'}
-        description={
-          isCreatingAccount
-            ? 'Create your Furni account to track orders and manage your profile.'
-            : 'Log in to your Furni account to track orders and manage your profile.'
-        }
-          exploreTo="/services"
-      />
-
       <section className="login-section container">
         <div className="login-card">
           <h2 className="login-card__heading">{isCreatingAccount ? 'Join Furni' : 'Welcome back'}</h2>
@@ -54,14 +44,24 @@ function Login() {
 
           <form className="login-form" onSubmit={handleSubmit}>
             {isCreatingAccount && (
-              <FormInput
-                id="login-name"
-                label="Name"
-                value={form.firstName}
-                onChange={set('firstName')}
-                autoComplete="name"
-                required
-              />
+              <>
+                <FormInput
+                  id="login-first-name"
+                  label="First Name"
+                  value={form.firstName}
+                  onChange={set('firstName')}
+                  autoComplete="given-name"
+                  required
+                />
+                <FormInput
+                  id="login-last-name"
+                  label="Last Name"
+                  value={form.lastName}
+                  onChange={set('lastName')}
+                  autoComplete="family-name"
+                  required
+                />
+              </>
             )}
 
             <FormInput
@@ -99,7 +99,7 @@ function Login() {
             {error && <p className="login-form__error">{error}</p>}
 
             <Button type="submit" variant="primary-solid" className="login-form__submit">
-              {isCreatingAccount ? 'Sign In' : 'Login'}
+              {isCreatingAccount ? 'Sign Up' : 'Login'}
             </Button>
           </form>
 

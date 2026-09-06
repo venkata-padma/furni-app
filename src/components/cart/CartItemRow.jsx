@@ -1,5 +1,6 @@
 import { X } from 'lucide-react';
 import QuantityStepper from './QuantityStepper';
+import { formatCurrency } from '../../utils/currency';
 import './CartItemRow.css';
 
 function CartItemRow({ item, onIncrease, onDecrease, onRemove }) {
@@ -11,7 +12,7 @@ function CartItemRow({ item, onIncrease, onDecrease, onRemove }) {
         <img src={item.image} alt={item.name} />
       </td>
       <td className="cart-row__name">{item.name}</td>
-      <td className="cart-row__price">${item.price.toFixed(2)}</td>
+      <td className="cart-row__price">{formatCurrency(item.price)}</td>
       <td>
         <QuantityStepper
           quantity={item.quantity}
@@ -19,7 +20,7 @@ function CartItemRow({ item, onIncrease, onDecrease, onRemove }) {
           onDecrease={() => onDecrease(item.id)}
         />
       </td>
-      <td className="cart-row__total">${lineTotal.toFixed(2)}</td>
+      <td className="cart-row__total">{formatCurrency(lineTotal)}</td>
       <td>
         <button
           type="button"

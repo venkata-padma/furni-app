@@ -2,6 +2,7 @@ import { Trash2, ShoppingCart } from 'lucide-react';
 import AccountEmpty from '../../components/account/AccountEmpty';
 import Button from '../../components/common/Button';
 import { useWishlist } from '../../context/WishlistContext';
+import { formatCurrency } from '../../utils/currency';
 import { useCart } from '../../context/CartContext';
 import './AccountPage.css';
 
@@ -52,7 +53,7 @@ function Wishlist() {
             <img src={item.image} alt={item.name} className="wishlist-item__img" />
             <div className="wishlist-item__body">
               <span className="wishlist-item__name">{item.name}</span>
-              <span className="wishlist-item__price">${item.price.toFixed(2)}</span>
+              <span className="wishlist-item__price">{formatCurrency(item.price)}</span>
             </div>
             <div className="wishlist-item__actions">
               <button

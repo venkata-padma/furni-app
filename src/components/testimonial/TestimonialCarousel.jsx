@@ -6,34 +6,41 @@ const AUTOPLAY_MS = 5000;
 
 function TestimonialCarousel({ testimonials }) {
   const [activeIndex, setActiveIndex] = useState(0);
-  const [paused, setPaused] = useState(false);
   const trackRef = useRef(null);
 
-  // Auto-advance through the testimonials in a loop; pause on hover/focus.
-  useEffect(() => {
-    if (paused || testimonials.length <= 1) return undefined;
-    const id = setInterval(() => {
-      setActiveIndex((i) => (i + 1) % testimonials.length);
-    }, AUTOPLAY_MS);
-    return () => clearInterval(id);
-  }, [paused, testimonials.length, activeIndex]);
-
-  useEffect(() => {
+  const scrollToIndex = (index) => {
     const track = trackRef.current;
     if (!track) return;
-    track.scrollTo({ left: activeIndex * track.clientWidth, behavior: 'smooth' });
-  }, [activeIndex]);
-
-  const active = testimonials[activeIndex];
-  if (!active) return null;
+    track.scrollTo({ left: index * track.clientWidth, behavior: 'smooth' });
+  };
 
   const showPrevious = () => {
-    setActiveIndex((i) => (i - 1 + testimonials.length) % testimonials.length);
+    setActiveIndex((currentIndex) => {
+      const nextIndex = (currentIndex - 1 + testimonials.length) % testimonials.length;
+      scrollToIndex(nextIndex);
+      return nextIndex;
+    });
   };
 
   const showNext = () => {
-    setActiveIndex((i) => (i + 1) % testimonials.length);
+    setActiveIndex((currentIndex) => {
+      const nextIndex = (currentIndex + 1) % testimonials.length;
+      scrollToIndex(nextIndex);
+      return nextIndex;
+    });
   };
+
+  // Auto-advance through the testimonials in a loop.
+  useEffect(() => {
+    if (testimonials.length <= 1) return undefined;
+    const id = setInterval(() => {
+      showNext();
+    }, AUTOPLAY_MS);
+    return () => clearInterval(id);
+  }, [testimonials.length]);
+
+  const active = testimonials[activeIndex];
+  if (!active) return null;
 
   const handleKeyDown = (event) => {
     if (event.key === 'ArrowLeft') showPrevious();
@@ -52,10 +59,6 @@ function TestimonialCarousel({ testimonials }) {
     <section
       className="testimonials"
       aria-label="Customer testimonials"
-      onMouseEnter={() => setPaused(true)}
-      onMouseLeave={() => setPaused(false)}
-      onFocusCapture={() => setPaused(true)}
-      onBlurCapture={() => setPaused(false)}
     >
       <div className="container testimonials__inner">
         <h2 className="testimonials__heading">Testimonials</h2>
@@ -118,7 +121,10 @@ function TestimonialCarousel({ testimonials }) {
                   ? 'testimonials__dot testimonials__dot--active'
                   : 'testimonials__dot'
               }
-              onClick={() => setActiveIndex(i)}
+              onClick={() => {
+                setActiveIndex(i);
+                scrollToIndex(i);
+              }}
             />
           ))}
         </div>

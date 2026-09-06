@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { ChevronDown } from 'lucide-react';
 import Button from '../common/Button';
 import { STATUS_FLOW } from '../../context/OrdersContext';
+import { formatCurrency } from '../../utils/currency';
 
 function formatDate(iso) {
   try {
@@ -41,7 +42,7 @@ function OrderCard({ order, onBuyAgain, onCancel, onMarkReceived }) {
             <div className="order-card__item-meta">
               <span className="order-card__item-name">{item.name}</span>
               <span className="order-card__item-qty">
-                Qty {item.quantity} &middot; ${item.price.toFixed(2)}
+                Qty {item.quantity} &middot; {formatCurrency(item.price)}
               </span>
             </div>
           </div>
@@ -78,17 +79,17 @@ function OrderCard({ order, onBuyAgain, onCancel, onMarkReceived }) {
         <dl className="order-card__summary">
           <div>
             <dt>Subtotal</dt>
-            <dd>${order.subtotal.toFixed(2)}</dd>
+            <dd>{formatCurrency(order.subtotal)}</dd>
           </div>
           {order.discount > 0 && (
             <div>
               <dt>Discount{order.couponCode ? ` (${order.couponCode})` : ''}</dt>
-              <dd>-${order.discount.toFixed(2)}</dd>
+              <dd>-{formatCurrency(order.discount)}</dd>
             </div>
           )}
           <div>
             <dt>Delivery</dt>
-            <dd>{order.shipping > 0 ? `$${order.shipping.toFixed(2)}` : 'Free'}</dd>
+            <dd>{order.shipping > 0 ? formatCurrency(order.shipping) : 'Free'}</dd>
           </div>
           {order.address && (
             <div>
@@ -104,13 +105,13 @@ function OrderCard({ order, onBuyAgain, onCancel, onMarkReceived }) {
           )}
           <div className="order-card__summary-total">
             <dt>Total</dt>
-            <dd>${order.total.toFixed(2)}</dd>
+            <dd>{formatCurrency(order.total)}</dd>
           </div>
         </dl>
       )}
 
       <footer className="order-card__actions">
-        <span className="order-card__total-inline">Total ${order.total.toFixed(2)}</span>
+        <span className="order-card__total-inline">Total {formatCurrency(order.total)}</span>
         <div className="order-card__buttons">
           {canConfirm && (
             <Button type="button" variant="primary-solid" onClick={onMarkReceived}>
