@@ -1,5 +1,7 @@
 .feature-item--service {
   position: relative;
+  display: block;
+  color: inherit;
   min-height: 304px;
   padding: var(--space-lg);
   overflow: hidden;

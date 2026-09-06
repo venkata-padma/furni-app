@@ -38,6 +38,7 @@ function Cart() {
       <HeroBanner
         title="Cart"
         description="Lorem Ipsum dolor sit amet consectetur. Pharetra aliquet ornarevelit blandit purus erat. Viverra ac tellus morbiet purus amet nec."
+        exploreTo="/services"
       />
 
       <section className="cart-section container">

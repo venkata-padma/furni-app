@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { ArrowLeft, ArrowRight } from 'lucide-react';
 import './TestimonialCarousel.css';
 
@@ -7,6 +7,7 @@ const AUTOPLAY_MS = 5000;
 function TestimonialCarousel({ testimonials }) {
   const [activeIndex, setActiveIndex] = useState(0);
   const [paused, setPaused] = useState(false);
+  const trackRef = useRef(null);
 
   // Auto-advance through the testimonials in a loop; pause on hover/focus.
   useEffect(() => {
@@ -16,6 +17,12 @@ function TestimonialCarousel({ testimonials }) {
     }, AUTOPLAY_MS);
     return () => clearInterval(id);
   }, [paused, testimonials.length, activeIndex]);
+
+  useEffect(() => {
+    const track = trackRef.current;
+    if (!track) return;
+    track.scrollTo({ left: activeIndex * track.clientWidth, behavior: 'smooth' });
+  }, [activeIndex]);
 
   const active = testimonials[activeIndex];
   if (!active) return null;
@@ -31,6 +38,14 @@ function TestimonialCarousel({ testimonials }) {
   const handleKeyDown = (event) => {
     if (event.key === 'ArrowLeft') showPrevious();
     if (event.key === 'ArrowRight') showNext();
+  };
+
+  const handleTrackScroll = (event) => {
+    const track = event.currentTarget;
+    const nextIndex = Math.round(track.scrollLeft / track.clientWidth);
+    if (nextIndex !== activeIndex && nextIndex >= 0 && nextIndex < testimonials.length) {
+      setActiveIndex(nextIndex);
+    }
   };
 
   return (
@@ -60,11 +75,24 @@ function TestimonialCarousel({ testimonials }) {
             <ArrowLeft size={22} strokeWidth={2.25} />
           </button>
 
-          <div className="testimonials__slide" key={active.id}>
-            <p className="testimonials__quote">{active.quote}</p>
-            <img src={active.avatar} alt={active.name} className="testimonials__avatar" />
-            <p className="testimonials__name">{active.name}</p>
-            <p className="testimonials__title">{active.title}</p>
+          <div
+            className="testimonials__track"
+            ref={trackRef}
+            onScroll={handleTrackScroll}
+            aria-label="Scrollable customer testimonials"
+          >
+            {testimonials.map((testimonial) => (
+              <article className="testimonials__slide" key={testimonial.id}>
+                <p className="testimonials__quote">{testimonial.quote}</p>
+                <img
+                  src={testimonial.avatar}
+                  alt={testimonial.name}
+                  className="testimonials__avatar"
+                />
+                <p className="testimonials__name">{testimonial.name}</p>
+                <p className="testimonials__title">{testimonial.title}</p>
+              </article>
+            ))}
           </div>
 
           <button

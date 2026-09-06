@@ -111,6 +111,7 @@ function Checkout() {
       <HeroBanner
         title="Checkout"
         description="Review your order and enter your delivery details to place the order."
+        exploreTo="/services"
       />
 
       <section className="checkout-section container">

@@ -18,6 +18,7 @@ function Services() {
       <HeroBanner
         title="Services"
         description="Lorem Ipsum dolor sit amet consectetur. Pharetra aliquet ornarevelit blandit purus erat. Viverra ac tellus morbiet purus amet nec."
+        exploreTo="/services"
       />
       <section className="services-section container services-grid">
         <HorizontalScrollRail>

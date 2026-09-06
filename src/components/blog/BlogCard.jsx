@@ -1,10 +1,27 @@
-import { Link } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import { ArrowRight, CalendarDays, UserRound } from 'lucide-react';
 import './BlogCard.css';
 
 function BlogCard({ post }) {
+  const navigate = useNavigate();
+  const openPost = () => navigate(`/blog/${post.id}`);
+
+  const handleKeyDown = (event) => {
+    if (event.key === 'Enter' || event.key === ' ') {
+      event.preventDefault();
+      openPost();
+    }
+  };
+
   return (
-    <article className="blog-card">
+    <article
+      className="blog-card"
+      role="link"
+      tabIndex="0"
+      onClick={openPost}
+      onKeyDown={handleKeyDown}
+      aria-label={`Read ${post.title}`}
+    >
       <div className="blog-card__media">
         <img src={post.image} alt={post.title} />
       </div>
@@ -14,10 +31,10 @@ function BlogCard({ post }) {
         <span><UserRound size={18} /> by {post.author}</span>
       </p>
       <h3 className="blog-card__title">{post.title}</h3>
-      <Link to={`/blog/${post.id}`} className="blog-card__more">Read More</Link>
-      <Link to={`/blog/${post.id}`} className="blog-card__arrow" aria-label={`Read ${post.title}`}>
+      <span className="blog-card__more">Read More</span>
+      <span className="blog-card__arrow" aria-hidden="true">
         <ArrowRight size={22} strokeWidth={2} />
-      </Link>
+      </span>
     </article>
   );
 }

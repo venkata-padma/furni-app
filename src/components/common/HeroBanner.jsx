@@ -9,7 +9,7 @@ const sofaHero = '/hero-sofa.png';
  * Shared dark-green hero section used at the top of every page.
  * title/description are page-specific; image defaults to the sofa hero shot.
  */
-function HeroBanner({ title, description, image = sofaHero, imageAlt = 'Furniture' }) {
+function HeroBanner({ title, description, image = sofaHero, imageAlt = 'Furniture', exploreTo = '/services' }) {
   const { pathname } = useLocation();
 
   return (
@@ -24,8 +24,8 @@ function HeroBanner({ title, description, image = sofaHero, imageAlt = 'Furnitur
             <Button as={Link} to="/shop" variant="primary">
               Shop Now
             </Button>
-            <Button as={Link} to="/shop" variant="outline">
-              Explore
+            <Button as={Link} to={exploreTo} variant="outline">
+              Explore Now
             </Button>
           </div>
         </div>

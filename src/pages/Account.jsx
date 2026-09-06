@@ -23,6 +23,7 @@ function Account() {
       <HeroBanner
         title={`Hi, ${user.firstName || 'there'}`}
         description="Manage your profile details, track your orders and keep your preferences up to date."
+        exploreTo="/services"
       />
 
       <section className="account-section container">

@@ -33,15 +33,15 @@
   margin-top: var(--space-lg);
 }
 
-.login-form__row {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: var(--space-sm);
-}
-
 .login-form__submit {
   width: 100%;
   margin-top: var(--space-xs);
+}
+
+.login-form__error {
+  color: var(--color-danger);
+  font-size: var(--fs-sm);
+  font-weight: 600;
 }
 
 .login-card__account-options {
@@ -79,8 +79,3 @@
   text-align: center;
 }
 
-@media (max-width: 480px) {
-  .login-form__row {
-    grid-template-columns: 1fr;
-  }
-}

@@ -12,10 +12,11 @@ function Login() {
   const [isCreatingAccount, setIsCreatingAccount] = useState(false);
   const [form, setForm] = useState({
     firstName: '',
-    lastName: '',
     email: '',
     password: '',
+    confirmPassword: '',
   });
+  const [error, setError] = useState('');
 
   if (isAuthenticated) return <Navigate to="/account/profile" replace />;
 
@@ -23,6 +24,11 @@ function Login() {
 
   function handleSubmit(e) {
     e.preventDefault();
+    if (isCreatingAccount && form.password !== form.confirmPassword) {
+      setError('Passwords do not match.');
+      return;
+    }
+    setError('');
     login(form);
     navigate('/account/profile');
   }
@@ -30,43 +36,33 @@ function Login() {
   return (
     <>
       <HeroBanner
-        title={isCreatingAccount ? 'Create Account' : 'Sign In'}
+        title={isCreatingAccount ? 'Create Account' : 'Login'}
         description={
           isCreatingAccount
             ? 'Create your Furni account to track orders and manage your profile.'
-            : 'Enter your details to access your Furni account, track orders and manage your profile.'
+            : 'Log in to your Furni account to track orders and manage your profile.'
         }
+          exploreTo="/services"
       />
 
       <section className="login-section container">
         <div className="login-card">
-          <h2 className="login-card__heading">
-            {isCreatingAccount ? 'Join Furni' : 'Welcome to Furni'}
-          </h2>
+          <h2 className="login-card__heading">{isCreatingAccount ? 'Join Furni' : 'Welcome back'}</h2>
           <p className="login-card__sub">
-            {isCreatingAccount
-              ? 'Set up your account for a smoother shopping experience.'
-              : "We'll use these details for your profile and delivery."}
+              {isCreatingAccount ? 'Set up your account for a smoother shopping experience.' : 'Enter your email and password to continue.'}
           </p>
 
           <form className="login-form" onSubmit={handleSubmit}>
-            <div className="login-form__row">
+            {isCreatingAccount && (
               <FormInput
-                id="login-first"
-                label="First Name"
+                id="login-name"
+                label="Name"
                 value={form.firstName}
                 onChange={set('firstName')}
-                autoComplete="given-name"
+                autoComplete="name"
                 required
               />
-              <FormInput
-                id="login-last"
-                label="Last Name"
-                value={form.lastName}
-                onChange={set('lastName')}
-                autoComplete="family-name"
-              />
-            </div>
+            )}
 
             <FormInput
               id="login-email"
@@ -88,8 +84,22 @@ function Login() {
               required
             />
 
+            {isCreatingAccount && (
+              <FormInput
+                id="login-confirm-password"
+                label="Confirm Password"
+                type="password"
+                value={form.confirmPassword}
+                onChange={set('confirmPassword')}
+                autoComplete="new-password"
+                required
+              />
+            )}
+
+            {error && <p className="login-form__error">{error}</p>}
+
             <Button type="submit" variant="primary-solid" className="login-form__submit">
-              {isCreatingAccount ? 'Create Account' : 'Sign In'}
+              {isCreatingAccount ? 'Sign In' : 'Login'}
             </Button>
           </form>
 
@@ -100,7 +110,7 @@ function Login() {
               className="login-card__account-action"
               onClick={() => setIsCreatingAccount((current) => !current)}
             >
-              {isCreatingAccount ? 'Sign in instead' : 'Create a new account'}
+              {isCreatingAccount ? 'Sign in' : 'Create new account'}
             </button>
           </div>
 

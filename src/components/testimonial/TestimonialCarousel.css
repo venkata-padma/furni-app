@@ -30,7 +30,19 @@
   box-shadow: 0 0 0 3px var(--color-mint), var(--shadow-md);
 }
 
+.testimonials__track {
+  display: flex;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  scrollbar-width: thin;
+  scrollbar-color: var(--color-primary) var(--color-bg-tint);
+  overscroll-behavior-x: contain;
+  scroll-behavior: smooth;
+}
+
 .testimonials__slide {
+  flex: 0 0 100%;
+  scroll-snap-align: start;
   animation: testimonial-fade 0.5s ease;
 }
 

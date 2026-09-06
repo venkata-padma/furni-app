@@ -10,12 +10,12 @@ function ServiceDetail() {
   const service = serviceDetails.find((item) => item.slug === serviceSlug);
 
   if (!service) {
-    return <HeroBanner title="Service not found" description="The service you are looking for is not available." />;
+    return <HeroBanner title="Service not found" description="The service you are looking for is not available." exploreTo="/services" />;
   }
 
   return (
     <>
-      <HeroBanner title={service.title} description={service.detailDescription} />
+      <HeroBanner title={service.title} description={service.detailDescription} exploreTo="/services" />
       <main className="service-detail container">
         <Link className="service-detail__back" to="/services"><ArrowLeft size={17} /> Back to services</Link>
         <section className="service-detail__content">
